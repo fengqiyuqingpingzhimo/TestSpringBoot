@@ -23,14 +23,14 @@ import com.example.demo.servlet.TestServlet;
 @Configuration
 public class WebConfig {
 	
-	@Value("${ds.userName}")
-    private String userName;
-    @Autowired
-    private Environment environment;
-    public void show() {
-        System.out.println("ds.userName:" + this.userName);
-        System.out.println("ds.password:" + this.environment.getProperty("ds.password"));
-    }
+//	@Value("${ds.userName}")
+//    private String userName;
+//    @Autowired
+//    private Environment environment;
+//    public void show() {
+//        System.out.println("ds.userName:" + this.userName);
+//        System.out.println("ds.password:" + this.environment.getProperty("ds.password"));
+//    }
 	
 	@Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {

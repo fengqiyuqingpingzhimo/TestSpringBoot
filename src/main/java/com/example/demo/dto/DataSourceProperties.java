@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 * @date 2018年4月2日  下午1:47:31
 * @version V1.0  
 */
-@Component
-@ConfigurationProperties(prefix="ds")
+//@Component
+//@ConfigurationProperties(prefix="ds")
 public class DataSourceProperties {
     private String url;
     

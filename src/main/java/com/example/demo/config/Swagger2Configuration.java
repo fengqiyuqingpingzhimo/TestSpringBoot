@@ -37,10 +37,10 @@ public class Swagger2Configuration {
     }
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()//
-                .title("Spring Boot 之 Web 篇")// 标题
-                .description("spring boot Web 相关内容")// 描述
-                .termsOfServiceUrl("http://www.extlight.com")//
-                .contact(new Contact("wdm", "http://www.extlight.com", "445847261@qq.com"))// 联系
+                .title("SpringBoot+Swagger2生成接口文档")// 标题
+                .description("接口详情")// 描述
+//                .termsOfServiceUrl("http://www.extlight.com")//
+//                .contact(new Contact("wdm", "http://www.extlight.com", "445847261@qq.com"))// 联系
                 .version("1.0")// 版本
                 .build();
     }

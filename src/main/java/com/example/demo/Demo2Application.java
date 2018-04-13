@@ -3,15 +3,16 @@ package com.example.demo;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.example.demo.config.WebConfig;
-import com.example.demo.dto.DataSourceProperties;
 import com.example.demo.listener.TestListener;
 
 @SpringBootApplication
+@EnableTransactionManagement //如果mybatis中service实现类中加入事务注解，需要此处添加该注解
+@MapperScan("com.example.demo.mapper") //扫描mybatis mapper
 public class Demo2Application {
 	 public void onStartup(ServletContext servletContext) throws ServletException {
 	        // 配置 Servlet
@@ -29,8 +30,9 @@ public class Demo2Application {
      */
 	public static void main(String[] args) {
 //		SpringApplication.run(Demo2Application.class, args);
-		ConfigurableApplicationContext context = SpringApplication.run(Demo2Application.class, args);
-        context.getBean(WebConfig.class).show();
-        context.getBean(DataSourceProperties.class).show();
+//		ConfigurableApplicationContext context = SpringApplication.run(Demo2Application.class, args);
+//        context.getBean(WebConfig.class).show();
+//        context.getBean(DataSourceProperties.class).show();
+		 SpringApplication.run(Demo2Application.class, args);
 	}
 }
