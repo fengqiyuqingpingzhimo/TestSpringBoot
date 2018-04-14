@@ -7,11 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JsonResult;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 /**  
 * @Title: UserController.java  
@@ -52,11 +55,13 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "users", method = RequestMethod.GET)
-	public ResponseEntity<JsonResult> getUserList (){
+	public ResponseEntity<JsonResult> getUserList (@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum){
+		PageHelper.startPage(pageNum,5);
 		JsonResult r = new JsonResult();
 		try {
 			List<User> users = userService.getUserList();
-			r.setResult(users);
+			PageInfo<User> pageInfo = new PageInfo<User>(users);
+			r.setResult(pageInfo);
 			r.setStatus("ok");
 		} catch (Exception e) {
 			r.setResult(e.getClass().getName() + ":" + e.getMessage());

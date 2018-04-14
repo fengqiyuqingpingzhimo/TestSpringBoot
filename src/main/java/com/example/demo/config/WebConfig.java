@@ -2,15 +2,13 @@ package com.example.demo.config;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
@@ -19,6 +17,8 @@ import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.example.demo.filter.TextFilter;
 import com.example.demo.servlet.TestServlet;
+import com.github.pagehelper.PageHelper;
+
 
 @Configuration
 public class WebConfig {
@@ -80,5 +80,24 @@ public class WebConfig {
 	@Bean
     public ServerEndpointExporter serverEndpointExporter() {
         return new ServerEndpointExporter();
+    }
+	
+	/**
+	 * 
+	* @Description: springboot 集成mybatis 分页插件PageHelper
+	* @author wdm  
+	* @date 2018年4月14日  上午9:16:34
+	 */
+	@Bean
+    public PageHelper pageHelper(){
+        //分页插件
+        PageHelper pageHelper = new PageHelper();
+        Properties properties = new Properties();
+        properties.setProperty("reasonable", "true");
+        properties.setProperty("supportMethodsArguments", "true");
+        properties.setProperty("returnPageInfo", "check");
+        properties.setProperty("params", "count=countSql");
+        pageHelper.setProperties(properties);
+        return pageHelper;
     }
 }
