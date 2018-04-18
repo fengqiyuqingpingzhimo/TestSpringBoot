@@ -69,10 +69,10 @@
 <!--             </exclusions>  -->
 		</dependency>
 		<!-- freemarker  前端模板文件1 -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-freemarker</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 		    <groupId>org.springframework.boot</groupId> -->
+<!-- 		    <artifactId>spring-boot-starter-freemarker</artifactId> -->
+<!-- 		</dependency> -->
 		<!--thymeleaf   前端模板文件2 -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
@@ -148,6 +148,23 @@
 	    	<artifactId>spring-boot-configuration-processor</artifactId>
 	    	<optional>true</optional>
 	    </dependency>
+	    <!-- web前端 jars -->
+	    <!-- 引入该jar 前台引入省略版本号 -->
+	    <dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>webjars-locator</artifactId>
+		    <version>0.32</version>
+		</dependency>
+	    <dependency>  
+		    <groupId>org.webjars</groupId>  
+		    <artifactId>bootstrap</artifactId>  
+		    <version>3.3.7-1</version>  
+		</dependency> 
+	    <dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>jquery</artifactId>
+		    <version>1.11.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

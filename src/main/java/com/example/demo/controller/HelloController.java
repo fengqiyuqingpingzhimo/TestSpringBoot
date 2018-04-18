@@ -1,45 +1,44 @@
 package com.example.demo.controller;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @RestController =@Controller+@ResponseBody  代表当前类下所有方法返回json 不在执行跳转页面
+ * */
 @RestController 
+@RequestMapping("hello")
 public class HelloController {
-	private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
+//	private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	
-	 @RequestMapping(value="/hello", method=RequestMethod.GET)  
-	 public String HelloController() {  
+	 @RequestMapping(value="", method=RequestMethod.GET)  
+	 public String hello() {  
+		 logger.info("======> hello");
 	        return "Hello World!";  
 	 }  
-	 @RequestMapping(value="/hello2", method=RequestMethod.GET)  
-	 public String Hello2Controller() {  
-		 String url="http://www.271edu.cn/official/gi-18429";
-		 logger.info("抓取网页数据!");
-		 try {
-//			Connection conn=Jsoup.connect(url).timeout(5000); 
-//			conn.header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");  
-//			conn.header("Accept-Encoding", "gzip, deflate, sdch");  
-//			conn.header("Accept-Language", "zh-CN,zh;q=0.8");  
-//            conn.header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");  
-            Document doc=Jsoup.connect(url).header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0").get();  
-			Elements ele=doc.getElementsByClass("bdiv");
-			logger.info(ele.text());
-		} catch (IOException e) {
-//			logger.error("抓取网页信息失败!"); 
-			e.printStackTrace();
-		}
-		logger.info("抓取网页执行完毕!"); 
-	    return "Hello2 World!";  
-	 }  
+	 
+	 @RequestMapping(value="data", method=RequestMethod.GET)  
+	 public List<Map<String, Object>> getData(){
+		 List<Map<String, Object>> data=new ArrayList<Map<String, Object>>();
+		 for(int i=0;i<10;i++) {
+			 Map<String, Object> map =new HashMap<String, Object>();
+			 map.put("name", "name_"+i);
+			 map.put("value", "value_"+i);
+			 data.add(map);
+		 }
+		 return data;
+	 }
+	 
+	 
 	 
 	 
 
