@@ -39,8 +39,8 @@ public class UserService {
 		return userMapper.getUserList();
 	}
 	
-	
-	
-	
+	public void delete(String gid) {
+		 this.userMapper.delete(gid);
+	}
 
 }

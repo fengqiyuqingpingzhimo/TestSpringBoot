@@ -95,6 +95,25 @@ public class UserController {
 		}
 		return ResponseEntity.ok(r);
 	}
+	/**
+	* @Description: 删除用户
+	* @author wdm  
+	* @date 2018年4月14日  上午10:53:45
+	 */
+	@RequestMapping(value = "deluser", method = RequestMethod.GET)
+	public ResponseEntity<JsonResult> deluser (String gid){
+		JsonResult r = new JsonResult();
+		try {
+		   userService.delete(gid);
+			r.setResult("删除成功!");
+			r.setStatus("ok");
+		} catch (Exception e) {
+			r.setResult(e.getClass().getName() + ":" + e.getMessage());
+			r.setStatus("error");
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(r);
+	}
 	
 	
 
