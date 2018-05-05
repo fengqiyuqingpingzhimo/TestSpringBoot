@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="app">
+<p>{{ foo }}</p>
+  <!-- 这里的 `foo` 不会更新！ -->
+<button v-on:click="foo = 'baz'">Change it</button>
+</div>
+<script src="/vue/Vue.js"></script>
+<script type="text/javascript">
+var obj = {
+		  foo: 'bar'
+		}
+// Object.freeze(obj)		
+var vm = new Vue({
+	  el: '#app',
+	  data: obj,
+	  created:function(){
+		  console.log('foo is: ' + this.foo)
+	  }
+	});
+// vm.$data === obj // => true
+// vm.$el === document.getElementById('app') // => true	
+// $watch 是一个实例方法
+vm.$watch('foo', function (newValue, oldValue) {
+  // 这个回调将在 `vm.a` 改变后调用
+  console.log(newValue+"    "+oldValue)
+})
+</script>
+</body>
+</html>

@@ -9,7 +9,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.example.demo.controller.HelloController;
+import com.example.demo.controller.admin.HelloController;
 
 public class HelloControlerTests {
 	

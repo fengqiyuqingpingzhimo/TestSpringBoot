@@ -6,8 +6,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>demo-2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-<!-- <packaging>war</packaging> -->
+<!-- 	<packaging>jar</packaging> -->
+<packaging>war</packaging>
 
 	<name>demo-2</name>
 	<description>Demo project for Spring Boot</description>
@@ -68,6 +68,12 @@
 <!-- 	             </exclusion> -->
 <!--             </exclusions>  -->
 		</dependency>
+		<!-- 打包时不再使用嵌入式tomcat jar -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<!-- freemarker  前端模板文件1 -->
 <!-- 		<dependency> -->
 <!-- 		    <groupId>org.springframework.boot</groupId> -->
@@ -78,6 +84,12 @@
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		<!-- 解决thymeleaf 对html要求严格问题  -->
+		<dependency>  
+		       <groupId>net.sourceforge.nekohtml</groupId>  
+		       <artifactId>nekohtml</artifactId>  
+		       <version>1.9.22</version>  
+		</dependency> 
 		<!-- fastjson  -->
 		<dependency>
 		    <groupId>com.alibaba</groupId>
@@ -123,12 +135,6 @@
 		    <artifactId>springfox-swagger-ui</artifactId>
 		    <version>2.7.0</version>
 		</dependency>
-        <!--因配置外部TOMCAT 而配置-->
-<!--         <dependency> -->
-<!--             <groupId>org.springframework.boot</groupId> -->
-<!--             <artifactId>spring-boot-starter-tomcat</artifactId> -->
-<!--             <scope>provided</scope> -->
-<!--         </dependency> -->
         <dependency>
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-web-services</artifactId>
@@ -165,6 +171,16 @@
 		    <artifactId>jquery</artifactId>
 		    <version>1.11.2</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>vue</artifactId>
+		    <version>2.5.13</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.webjars.npm</groupId>
+		    <artifactId>vue-router</artifactId>
+		    <version>2.7.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -188,7 +204,6 @@
                 </configuration>
             </plugin>
 		</plugins>
+		<finalName>Wangdm</finalName>
 	</build>
-
-
 </project>

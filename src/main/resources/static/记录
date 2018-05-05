@@ -28,4 +28,6 @@
 
 http://springboot.fun/    Spring Boot 中文索引
 
+项目打包  mvn clean package  -Dmaven.test.skip=true
+
 

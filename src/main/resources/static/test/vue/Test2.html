@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="app">
+<ol>
+  <!-- 创建一个 todo-item 组件的实例 -->
+<!--   <todo-item></todo-item> -->
+  <!-- 现在我们为每个 todo-item 提供 todo 对象todo 对象是变量，即其内容可以是动态的。我们也需要为每个组件提供一个“key”，稍后再作详细解释。-->
+  <todo-item
+      v-for="item in groceryList"
+      v-bind:todo="item"
+      v-bind:key="item.id">
+   </todo-item>
+</ol>
+</div>
+<script src="/vue/Vue.js"></script>
+<script type="text/javascript">
+//定义名为 todo-item 的新组件
+Vue.component('todo-item', {
+//   template: '<li>这是个待办项</li>'
+// todo-item 组件现在接受一个"prop"，类似于一个自定义特性。这个 prop 名为 todo。
+	props: ['todo'],
+	template: '<li>{{ todo.text }}</li>'
+})
+var app = new Vue({
+	  el: '#app',
+	  data: {
+		  groceryList: [
+		      { id: 0, text: '蔬菜' },
+		      { id: 1, text: '奶酪' },
+		      { id: 2, text: '随便其它什么人吃的东西' }
+		    ]
+	  }
+// 	  methods:{
+// 		  reverseMessage: function () {
+// 		      this.message = this.message.split('').reverse().join('')
+// 		    }
+// 	  }
+	})
+</script>
+</body>
+</html>

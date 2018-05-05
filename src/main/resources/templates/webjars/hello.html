@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Document</title>
+    <link rel="stylesheet"  th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />  
+<!--     http://www.ityouknow.com/springboot/2016/05/01/springboot(%E5%9B%9B)-thymeleaf%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3.html -->
+</head>
+<body>
+<!--     <footer th:fragment="copy"> &copy; 2016</footer>     -->
+    <div class="container">
+        <h3>html</h3><br/>
+        <h2 th:text="${msg}"></h2>
+        <a th:href="@{http://www.thymeleaf.org}">Thymeleaf</a>
+    </div>
+    <div class="container"><br/>  
+            <div class="alert alert-success">  
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>  
+                Hello, <strong th:text="${author}">WebJars!</strong>  
+            </div>  
+<!--             <div th:include="footer :: copy"></div> -->
+        </div>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>          
+</body>
+</html>
