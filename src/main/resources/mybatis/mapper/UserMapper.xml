@@ -7,7 +7,7 @@
     <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
     <result column="CREATETIME" property="createtime" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List" > ID, LOGINNAME, PASSWORD, CREATETIME</sql>
+  <sql id="Base_Column_List" > ID, LOGINNAME, PASSWORD, CREATETIME,BHPX,FLAG</sql>
   <select id="selectByPrimaryKey"  resultMap="BaseResultMap"  parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

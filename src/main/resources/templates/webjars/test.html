@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Wangdm</title>
+</head>
+<body>
+   <header id="header" style="width: 100%;height: 60px;background: green;"></header>
+   <div style="width: 100%; height: 1000px;background: gray;"></div>
+<script th:src="headroom.min.js"></script>
+<script>
+var header = new Headroom(document.getElementById("header"), {
+    tolerance: 10,
+    offset: 80,
+    classes: {
+        initial: "animated",
+        pinned: "slideDown",
+        unpinned: "slideUp"
+    }
+});
+</script>
+</body>
+</html>

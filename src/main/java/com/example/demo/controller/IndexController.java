@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -16,10 +18,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController {
 	
-	 @GetMapping(value = "/")
-	    public String index(HttpServletRequest request) {
-	        return "index";
-	    }
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	
+    @GetMapping(value = "/")
+    public String index(HttpServletRequest request) {
+    	logger.debug("系统默认访问页面!");
+        return "index";
+    }
 	
 
 }

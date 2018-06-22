@@ -1,6 +1,9 @@
 package com.example.demo.config;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -9,8 +12,8 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
@@ -77,16 +80,23 @@ public class WebConfig {
 //	public ServletListenerRegistrationBean<TestListener> servletListenerRegistrationBean() {
 //	    return new ServletListenerRegistrationBean<TestListener>(new TestListener());
 //	}
-	@Bean
-    public ServerEndpointExporter serverEndpointExporter() {
-        return new ServerEndpointExporter();
-    }
+	/**
+	 * springboot整合 websocket
+	 * 当项目打成war在tomcat运行是,该配置需注释
+	 * @Description: TODO
+	 * @author wdm  
+	 * @date 2018年6月5日  上午10:33:05
+	 */
+//	@Bean
+//    public ServerEndpointExporter serverEndpointExporter() {
+//        return new ServerEndpointExporter();
+//    }
 	
 	/**
 	 * 
-	* @Description: springboot 集成mybatis 分页插件PageHelper
-	* @author wdm  
-	* @date 2018年4月14日  上午9:16:34
+	 * @Description: springboot 集成mybatis 分页插件PageHelper
+	 * @author wdm  
+	 * @date 2018年4月14日  上午9:16:34
 	 */
 	@Bean
     public PageHelper pageHelper(){
@@ -100,4 +110,25 @@ public class WebConfig {
         pageHelper.setProperties(properties);
         return pageHelper;
     }
+	/**
+	 * @Description: 日期变量的值自动映射为java日期格式
+	 * @author wdm  
+	 * @date 2018年6月21日  下午4:31:17
+	 */
+//	@Bean
+//    public Converter<String, Date> addNewConvert() {
+//        return new Converter<String, Date>() {
+//            @Override
+//            public Date convert(String source) {
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//                Date date = null;
+//                try {
+//                    date = sdf.parse((String) source);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                return date;
+//            }
+//        };
+//    }
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="app">
+   &yen;
+</div>
+<script src="/vue/Vue.js"></script>
+<script src="/vue/vuex.js"></script>
+<script type="text/javascript">
+const store = new Vuex.Store({
+	  state: {
+	    count: 0
+	  },
+	  mutations: {
+	    increment (state) {
+	      state.count++
+	    }
+	  }
+	});
+var app = new Vue({
+	  el: '#app',
+	  data: {
+		  context:1,
+		  name:'Wangdm'
+	  }
+	})
+</script>
+</body>
+</html>

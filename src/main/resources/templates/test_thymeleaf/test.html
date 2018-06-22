@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Thymeleaf测试</title>
+<!--     <link rel="stylesheet"  th:href="@{}" />   -->
+<style type="text/css">
+IMG{max-width: 50px;}
+
+</style>
+</head>
+<body>
+        <dl>
+             <dt> name</dt>
+             <dd th:text="${bean.author}">Red Chair</dd>
+ 
+             <dt> time</dt>
+<!--              <dd th:text="${bean.time}">350</dd> -->
+<dd th:text="${#dates.format(bean.time, 'yyyy-MM-dd')}">350</dd>
+ 
+<!--              <dt>Product available from</dt> -->
+<!--              <dd th:text="${product.availableFrom}">2014-12-01</dd> -->
+        </dl>
+   <span th:text="${'author:'+author}">王得民</span>
+   <p class="answer" th:text="${new java.util.Date().getTime()}">22-Jun-2013</p>
+   <p class="answer" th:text="${list[6].key}">22-Jun-2013</p>
+   <p th:text="${html}"></p>
+   <p th:utext="${html}"></p>
+   <table>
+    <thead><tr><th>序号</th><th>key</th><th>val</th></tr></thead>
+    <tbody>
+    <tr th:each="list:${list}"> <td th:text="${listStat.count}">1</td><td th:text="${list.key}"></td><td th:text="${list.val}"></td></tr>
+    </tbody>
+   </table>
+   <hr/>
+   <table>
+    <thead><tr><th>序号</th><th>编号</th><th>名称</th><th>密码</th><th>创建时间</th><th>编号排序</th><th>人员类型</th><th>操作相关</th></tr></thead>
+    <tbody th:remove="all-but-first">
+    <tr th:each="list,listStat1:${data}"> 
+	    <td th:text="${listStat1.count}">1</td>
+	    <td th:text="${list.id}"></td>
+	    <td th:text="${list.loginname}"></td>
+	    <td th:text="${list.password}"></td>
+	    <td th:text="${list.createtime}"></td>
+	    <td th:text="${list.bhpx}" style="text-align: right;"></td>
+	    <td th:switch="${list.flag}">
+	       <img th:case="'ONE'" src="" th:src="@{/image/1.png}">
+	       <img th:case="'TWO'" src="" th:src="@{/image/2.png}">
+	       <span th:case="*">Unknown</span>
+	    </td>
+<!-- 	    > , < , >= , <= ( gt , lt , ge , le ) -->
+	    <td> <span th:if="${list.bhpx lt 3}" class="offer">测试!</span></td>
+    </tr>
+     <tr> 
+	    <td>111</td>
+	    <td>ids</td>
+	    <td>loginnames</td>
+	    <td>passwords</td>
+	    <td>createtimes</td>
+	    <td style="text-align: right;">bhpxs</td>
+	    <td >
+	       <span>Unknown</span>
+	    </td>
+	    <td> <span class="offer">测试!</span></td>
+    </tr>
+    </tbody>
+   </table>
+   <div th:include="test_thymeleaf/footer :: footer" class="footerContainer"></div>
+   <div th:replace="test_thymeleaf/footer :: footer" class="footerContainer"></div>
+<script th:inline="javascript">
+        var size= [[${data.size()}]];
+        console.info(size);
+        //尺寸等于3时打印日志..
+        /*[# th:if="${data.size() eq 3}"]*/
+        console.info('Welcome admin');
+        /*[/]*/
+</script>
+</body>
+</html>

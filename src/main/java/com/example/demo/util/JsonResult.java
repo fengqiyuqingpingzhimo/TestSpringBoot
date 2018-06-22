@@ -7,6 +7,7 @@ package com.example.demo.util;
 * @author wdm  
 * @date 2018年4月13日  下午2:58:27
 * @version V1.0  
+* 关于status变量为String 而不是boolean情况说明: 字符串可以表达更多的情况 如ok error fail等,boolean只能适应更少的情况
 */
 public class JsonResult {
 	

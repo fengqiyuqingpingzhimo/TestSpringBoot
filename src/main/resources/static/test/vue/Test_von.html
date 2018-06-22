@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Wangdm</title>
+</head>
+<body>
+<div id="app"> 
+  <button v-on:click.once="counter += 1">Add 1</button>
+  <p>The button above has been clicked {{ counter }} times.</p>
+ </div>
+<script src="/vue/Vue.js"></script>
+<script type="text/javascript">
+// computed  计算属性
+// methods 方法
+//watch  侦听属性
+var vm=new Vue({
+	el:'#app',
+	data:{
+		 counter: 0
+	}
+});
+
+</script>
+</body>
+</html>

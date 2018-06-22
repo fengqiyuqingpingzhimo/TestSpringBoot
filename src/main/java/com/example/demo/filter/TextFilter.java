@@ -22,12 +22,12 @@ public class TextFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
+	public void doFilter(ServletRequest request, ServletResponse arg1, FilterChain arg2)
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		 long start = System.currentTimeMillis();
 
-		 arg2.doFilter(arg0, arg1);
+		 arg2.doFilter(request, arg1);
 		 logger.info("TextFilter过滤时间耗时监控,使用时间:{}",System.currentTimeMillis() - start);
 	}
 

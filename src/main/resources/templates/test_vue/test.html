@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Vue测试</title>
+<!--     <link rel="stylesheet"  th:href="@{}" />   -->
+</head>
+<body>
+   Vue测试！
+   <div id="app">
+	  <ul>
+	    <li v-for="user in users">{{ user.loginname }}</li>
+	  </ul>
+   </div>
+<script th:src="@{/vue/Vue.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+<script type="text/javascript">
+Vue.prototype.$appName = 'My App';
+Vue.prototype.$http = axios;
+new Vue({
+	el: '#app',
+	  data: {
+	    users: []
+	  },
+	  created () {
+	    var vm = this
+	    this.$http
+	      .get('/users')
+	      .then(function (response) {
+// 	    	  console.log(response);
+	        vm.users = response.data.result.list
+	      })
+	  },
+	  beforeCreate: function () {
+	    console.log(this.$appName)
+	  }
+	});
+
+</script>
+</body>
+</html>

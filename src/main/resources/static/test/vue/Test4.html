@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Wangdm</title>
+</head>
+<body>
+<div id="app"> 
+<p> 测试:{{mes}}</p>
+<p >测试2:<span v-html="mes"></span></p>
+<button type="button"  :disabled="isButtonDisabled">提交</button><br/>
+{{ number + 1 }}
+<div  class="kl"   v-bind:class="classObject"></div>
+<div v-bind:class="[flag?activeClass:'',errorClass]"   v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }" >测试!!!!!!!!!!!</div>
+<div v-bind:class="[flag?activeClass:'',errorClass]"   v-bind:style="[baseStyles]">测试2222!!!!!!!!!!!</div>
+<div v-if="Math.random() > 0.5"> Now you see me</div><div v-else>Now you don't</div>
+ </div>
+<script src="/vue/Vue.js"></script>
+<script type="text/javascript">
+// computed  计算属性
+// methods 方法
+//watch  侦听属性
+var vm=new Vue({
+	el:'#app',
+	data:{
+		flag:false,
+		mes:'<span style="color:red;">Wangdm</span>',
+		classObject:{
+			a:true,
+			b:false
+		},
+		activeClass:"active",
+		errorClass:"text-danger",
+		activeColor:'red',
+		fontSize:'14',
+		baseStyles:'border:1px solid red',
+		isButtonDisabled:true,
+		number:1
+	}
+});
+
+</script>
+</body>
+</html>

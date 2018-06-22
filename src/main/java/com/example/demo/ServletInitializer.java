@@ -15,10 +15,10 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 */
 //@SpringBootApplication  //- springboot项目,并配置扫描路径
 //@EnableAutoConfiguration //- springboot自动配置，这个注解可以根据你依赖的包自动生成相关配置
-public class ServletInitializer extends SpringBootServletInitializer {
-	
-	@Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(Demo2Application.class);
-    }
-}
+//public class ServletInitializer extends SpringBootServletInitializer {
+//	
+//	@Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//        return application.sources(Demo2Application.class);
+//    }
+//}

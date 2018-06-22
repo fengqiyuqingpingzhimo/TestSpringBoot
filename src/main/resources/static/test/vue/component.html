@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="app">
+ <button-counter></button-counter>
+ <button-counter></button-counter><br/>
+<!--  <blog-post title="My journey with Vue"></blog-post> -->
+<!-- <blog-post title="Blogging with Vue"></blog-post> -->
+<!-- <blog-post title="Why Vue is so fun"></blog-post> -->
+<div :style="{ fontSize: postFontSize + 'em' }">
+<blog-post
+  v-for="post in posts"
+  v-bind:key="post.id"
+  v-bind:post="post"
+  v-on:enlarge-text="postFontSize += $event"
+></blog-post>
+</div>
+<hr/>
+<custom-input v-model="searchText"></custom-input>
+<hr/>
+<alert-box>
+  Something bad happened.
+</alert-box>
+</div>
+<script src="/vue/Vue.js"></script>
+<script type="text/javascript">
+//定义一个名为 button-counter 的新组件
+Vue.component('button-counter', {
+  data: function () {
+    return {count: 0 }
+  },
+  template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+});
+//BLOG
+Vue.component('blog-post', {
+  props: ['post'],
+  template: '<div class="blog-post"><button v-on:click="$emit(\'enlarge-text\',0.2)">Enlarge text</button><h3>{{ post.title }}</h3><div v-html="post.content"></div><hr/></div>'
+});
+//input
+Vue.component('custom-input', {
+  props: ['value'],
+  template: '<input  v-bind:value="value"  v-on:input="$emit(\'input\', $event.target.value)">'
+});
+//slot
+Vue.component('alert-box', {
+  template: '<div class="demo-alert-box"><strong>Error!</strong><slot></slot></div>'
+})
+var app = new Vue({
+	  el: '#app',
+	  data: {
+		  context:1,
+		  name:'Wangdm',
+		  postFontSize:1,
+		  searchText :1,
+		  posts: [
+		      { id: 1, title: 'My journey with Vue',content:'内容1111' },
+		      { id: 2, title: 'Blogging with Vue' ,content:'内容2222' },
+		      { id: 3, title: 'Why Vue is so fun' ,content:'内容3333' },
+		    ]
+	  }
+	})
+</script>
+</body>
+</html>

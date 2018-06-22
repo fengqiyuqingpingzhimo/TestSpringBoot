@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.User">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="LOGINNAME" jdbcType="VARCHAR" property="loginname" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="BHPX" jdbcType="DECIMAL" property="bhpx" />
+    <result column="FLAG" jdbcType="VARCHAR" property="flag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, LOGINNAME, PASSWORD, CREATETIME, BHPX, FLAG
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from HYJ.SYS_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="getUserList1" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM SYS_USER
+   </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from HYJ.SYS_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.User">
+    insert into HYJ.SYS_USER (ID, LOGINNAME, PASSWORD, 
+      CREATETIME, BHPX, FLAG
+      )
+    values (#{id,jdbcType=VARCHAR}, #{loginname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{bhpx,jdbcType=DECIMAL}, #{flag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.User">
+    insert into HYJ.SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="loginname != null">
+        LOGINNAME,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="bhpx != null">
+        BHPX,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="loginname != null">
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bhpx != null">
+        #{bhpx,jdbcType=DECIMAL},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.User">
+    update HYJ.SYS_USER
+    <set>
+      <if test="loginname != null">
+        LOGINNAME = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bhpx != null">
+        BHPX = #{bhpx,jdbcType=DECIMAL},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.User">
+    update HYJ.SYS_USER
+    set LOGINNAME = #{loginname,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      BHPX = #{bhpx,jdbcType=DECIMAL},
+      FLAG = #{flag,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

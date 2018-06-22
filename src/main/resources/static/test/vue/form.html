@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="app">
+  <p> {{ message }}</p>
+   <input v-model="message" >
+   <hr/>
+   <span>Multiline message is:</span>
+<p style="white-space: pre-line;">{{ message }}</p>
+<br>
+<textarea v-model="message" placeholder="add multiple lines"></textarea>
+<hr>
+<input type="checkbox" id="checkbox" v-model="checked" value="testwdm">
+<label for="checkbox">{{ checked }}</label>
+<hr>
+<div id='example-3'>
+  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+  <label for="jack">Jack</label>
+  <input type="checkbox" id="john" value="John" v-model="checkedNames">
+  <label for="john">John</label>
+  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+  <label for="mike">Mike</label>
+  <br>
+  <span>Checked names: {{ checkedNames }}</span>
+</div>
+<hr>
+<div id="example-4">
+  <input type="radio" id="one" value="One" v-model="picked">
+  <label for="one">One</label>
+  <br>
+  <input type="radio" id="two" value="Two" v-model="picked">
+  <label for="two">Two</label>
+  <br>
+  <span>Picked: {{ picked }}</span>
+</div>
+<hr>
+<div id="example-5">
+  <select v-model="selected">
+    <option disabled value="">请选择</option>
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
+  <span>Selected: {{ selected }}</span>
+</div>
+<hr>
+<div id="example-6">
+  <select v-model="selected1" multiple style="width: 50px;">
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
+  <br>
+  <span>Selected: {{ selected1 }}</span>
+</div>
+<HR>
+<input type="number"   v-model.number="num">  {{num}}
+</div>
+<script src="/vue/Vue.js"></script>
+<script type="text/javascript">
+var app = new Vue({
+	  el: '#app',
+	  data: {
+	    message: 'Hello Vue!',
+	    checked:true,
+	    checkedNames:[],
+	    picked:[],
+	    selected:'',
+	    selected1:[],
+	    num:10
+	  }
+	})
+</script>
+</body>
+</html>

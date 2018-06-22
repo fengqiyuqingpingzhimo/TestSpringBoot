@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Wangdm</title>
+</head>
+<body>
+<div id="app"> 
+<!-- 　<p> {{ date | date }}</p> -->
+   <input type="text"  v-model="price | cents" ><br/>
+ </div>
+<script src="/vue/Vue.js"></script>
+<script type="text/javascript">
+// Vue.filter('date', function(value) {
+// 	　if(!value instanceof Date) return value;
+// 	　return value.toLocaleDateString();
+// });
+Vue.filter('cents', {
+	　 read : function(value) {
+	　　 return (value / 100).toFixed(2);
+	　 },
+	　 write : function(value) {
+	　　 return value * 100;
+	　 }
+});	 
+var vm=new Vue({
+	el:'#app',
+	data: {
+		 date : new Date(),
+		 price:156
+	 }
+});
+
+</script>
+</body>
+</html>

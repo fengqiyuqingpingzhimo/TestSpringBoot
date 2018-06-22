@@ -1,6 +1,7 @@
 package com.example.demo.controller.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -71,6 +72,44 @@ public class UserController {
 		return ResponseEntity.ok(r);
 	}
 	
+	@RequestMapping(value = "users1", method = RequestMethod.GET)
+	public ResponseEntity<JsonResult> getUserList1 (@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum){
+		PageHelper.startPage(pageNum,5);
+		JsonResult r = new JsonResult();
+		try {
+			List<User> users = userService.getUserList1();
+			PageInfo<User> pageInfo = new PageInfo<User>(users);
+			r.setResult(pageInfo);
+			r.setStatus("ok");
+		} catch (Exception e) {
+			r.setResult(e.getClass().getName() + ":" + e.getMessage());
+			r.setStatus("error");
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(r);
+	}
+	
+	/**
+	 * 查询有单位的用户列表列表
+	 * @return
+	 */
+	@RequestMapping(value = "usersdw", method = RequestMethod.GET)
+	public ResponseEntity<JsonResult> getUserDwList (@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum){
+		PageHelper.startPage(pageNum,5);
+		JsonResult r = new JsonResult();
+		try {
+			List<Map<String, Object>> users = userService.getUserDwList();
+			PageInfo<Map<String, Object>> pageInfo = new PageInfo<Map<String, Object>>(users);
+			r.setResult(pageInfo);
+			r.setStatus("ok");
+		} catch (Exception e) {
+			r.setResult(e.getClass().getName() + ":" + e.getMessage());
+			r.setStatus("error");
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(r);
+	}
+	
 	/**
 	 * 添加用户
 	 * @param user
@@ -114,6 +153,33 @@ public class UserController {
 		}
 		return ResponseEntity.ok(r);
 	}
+	
+	/**
+	 * 添加用户
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value = "adduser", method = RequestMethod.GET)
+	public ResponseEntity<JsonResult> annInsert (User user){
+		JsonResult r = new JsonResult();
+		System.err.println(user.toString());
+		try {
+			int orderId = userService.annInsert(user);
+			if (orderId < 0) {
+				r.setResult(orderId);
+				r.setStatus("fail");
+			} else {
+				r.setResult(orderId);
+				r.setStatus("ok");
+			}
+		} catch (Exception e) {
+			r.setResult(e.getClass().getName() + ":" + e.getMessage());
+			r.setStatus("error");
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(r);
+	}
+	
 	
 	
 

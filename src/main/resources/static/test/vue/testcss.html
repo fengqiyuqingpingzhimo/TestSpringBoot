@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Wangdm</title>
+</head>
+<body>
+<div id="app"> 
+<div v-if="show" transition="my-startup">测试!!!!!!!!!!!!!!!!!!!!!!!</div>
+ </div>
+<script src="/vue/Vue.js"></script>
+<script type="text/javascript">
+var vm=new Vue({
+	el:'#app',
+	data: {
+		show: false
+	 }
+});
+
+</script>
+</body>
+</html>

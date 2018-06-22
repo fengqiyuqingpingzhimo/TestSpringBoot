@@ -1,5 +1,8 @@
 package com.example.demo.model;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 public class User {
     private String id;
 
@@ -7,7 +10,11 @@ public class User {
 
     private String password;
 
-    private String createtime;
+    private Date createtime;
+
+    private BigDecimal bhpx;
+
+    private String flag;
 
     public String getId() {
         return id;
@@ -33,11 +40,39 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getCreatetime() {
+    public Date getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(String createtime) {
-        this.createtime = createtime == null ? null : createtime.trim();
+    public void setCreatetime(Date createtime) {
+    	System.err.println(createtime);
+        this.createtime = createtime;
     }
+
+    public BigDecimal getBhpx() {
+        return bhpx;
+    }
+
+    public void setBhpx(BigDecimal bhpx) {
+        this.bhpx = bhpx;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag == null ? null : flag.trim();
+    }
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", loginname=" + loginname + ", password=" + password + ", createtime=" + createtime
+				+ ", bhpx=" + bhpx + ", flag=" + flag + "]";
+	}
+    
+    
 }
