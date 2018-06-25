@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.dao.UnitMapper">
+  <select id="select" resultType="java.util.Map">
+   SELECT A.*,B.DWMC,B.DWBH FROM SYS_USER A LEFT JOIN SYS_UNIT B ON A.SSDW=B.GUID
+  </select>
+</mapper>

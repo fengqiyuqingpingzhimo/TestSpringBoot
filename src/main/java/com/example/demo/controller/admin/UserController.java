@@ -52,6 +52,26 @@ public class UserController {
 	}
 	
 	/**
+	 * 根据ID查询用户
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "annuser/{id}", method = RequestMethod.GET)
+	public ResponseEntity<JsonResult> getAnnUserById (@PathVariable(value = "id") String id){
+		JsonResult r = new JsonResult();
+		try {
+			User user = userService.annSelectByPrimaryKey(id);
+			r.setResult(user);
+			r.setStatus("ok");
+		} catch (Exception e) {
+			r.setResult(e.getClass().getName() + ":" + e.getMessage());
+			r.setStatus("error");
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(r);
+	}
+	
+	/**
 	 * 查询用户列表
 	 * @return
 	 */

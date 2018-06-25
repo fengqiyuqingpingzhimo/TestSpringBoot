@@ -45,7 +45,6 @@ public class User {
     }
 
     public void setCreatetime(Date createtime) {
-    	System.err.println(createtime);
         this.createtime = createtime;
     }
 
@@ -73,6 +72,34 @@ public class User {
 		return "User [id=" + id + ", loginname=" + loginname + ", password=" + password + ", createtime=" + createtime
 				+ ", bhpx=" + bhpx + ", flag=" + flag + "]";
 	}
+
+	/**
+	 * @param id
+	 * @param loginname
+	 * @param password
+	 * @param createtime
+	 * @param bhpx
+	 * @param flag
+	 */
+	public User(String id, String loginname, String password, Date createtime, BigDecimal bhpx, String flag) {
+		super();
+		this.id = id;
+		this.loginname = loginname;
+		this.password = password;
+		this.createtime = createtime;
+		this.bhpx = bhpx;
+		this.flag = flag;
+	}
+
+	/**
+	 * 
+	 */
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
     
     
 }

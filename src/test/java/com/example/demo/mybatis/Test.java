@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.example.demo.mapper.dao.UnitMapper;
 import com.example.demo.mapper.dao.UserMapper;
 
 /**  
@@ -25,9 +26,19 @@ public class Test {
 	@Autowired
 	private UserMapper UserMapper;
 	
+	@Autowired private UnitMapper UnitMapper;
+	
 	@org.junit.Test
 	public void testQuery() throws Exception {
-		List<Map<String, Object>> users = UserMapper.getUserDwList();
+//		List<Map<String, Object>> users = UserMapper.getUserDwList();
+		List<Map<String, Object>> users =UnitMapper.select();
+		System.out.println(users.toString());
+	}
+	
+	@org.junit.Test
+	public void testQuery1() throws Exception {
+//		List<Map<String, Object>> users = UserMapper.getUserDwList();
+		List<Map<String, Object>> users =UnitMapper.annselect();
 		System.out.println(users.toString());
 	}
 	

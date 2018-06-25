@@ -23,7 +23,7 @@ public class IndexController {
     @GetMapping(value = "/")
     public String index(HttpServletRequest request) {
     	logger.debug("系统默认访问页面!");
-        return "index";
+        return "login";
     }
 	
 

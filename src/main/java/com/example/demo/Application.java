@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 */
 @SpringBootApplication
 @EnableScheduling  //开启springboot 任务调度 
+@EnableCaching   //开启缓存
 @EnableTransactionManagement //如果mybatis中service实现类中加入事务注解，需要此处添加该注解
 @MapperScan("com.example.demo.mapper") //扫描mybatis mapper
 public class Application extends SpringBootServletInitializer {

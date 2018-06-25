@@ -3,10 +3,76 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Wangdm</title>
-<!--     <link rel="stylesheet"  th:href="@{}" />   -->
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<style>
+  .el-row {
+    margin-bottom: 20px;
+    text-align:center;
+    line-height:36px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .bg-purple-dark {
+    background: #99a9bf;
+  }
+  .bg-purple {
+    background: #d3dce6;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
+</style>
 </head>
 <body>
-登录测试!
-<!-- <script th:src="@{/js/index.js}"></script> -->
+<div id="app">
+<el-row>
+  <el-col :span="24" hidden-xs-only><div class="grid-content bg-purple-dark">24</div></el-col>
+</el-row>
+<el-row>
+  <el-col :span="12"><div class="grid-content bg-purple">12</div></el-col>
+  <el-col :span="12"><div class="grid-content bg-purple-light">12</div></el-col>
+</el-row>
+<el-row>
+  <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :span="8"><div class="grid-content bg-purple-light"></div></el-col>
+  <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
+<el-row>
+  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
+</el-row>
+<el-row>
+  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
+  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
+  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
+</el-row>
+</div>
+<script th:src="@{/vue/Vue.js}"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+new Vue({
+    el: '#app'
+  })
+
+</script>
 </body>
 </html>
