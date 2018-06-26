@@ -1,5 +1,7 @@
 package com.example.demo.mybatis;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,17 +30,42 @@ public class Test {
 	
 	@Autowired private UnitMapper UnitMapper;
 	
+//	@org.junit.Test
+//	public void testQuery() throws Exception {
+////		List<Map<String, Object>> users = UserMapper.getUserDwList();
+//		List<Map<String, Object>> users =UnitMapper.select();
+//		System.out.println(users.toString());
+//	}
+//	
+//	@org.junit.Test
+//	public void testQuery1() throws Exception {
+////		List<Map<String, Object>> users = UserMapper.getUserDwList();
+//		List<Map<String, Object>> users =UnitMapper.annselect();
+//		System.out.println(users.toString());
+//	}
+//	
 	@org.junit.Test
-	public void testQuery() throws Exception {
+	public void testQuery2() throws Exception {
 //		List<Map<String, Object>> users = UserMapper.getUserDwList();
-		List<Map<String, Object>> users =UnitMapper.select();
-		System.out.println(users.toString());
-	}
-	
-	@org.junit.Test
-	public void testQuery1() throws Exception {
-//		List<Map<String, Object>> users = UserMapper.getUserDwList();
-		List<Map<String, Object>> users =UnitMapper.annselect();
+		
+//		List<Map<String, Object>> users =UnitMapper.selectWhr("山","0002");
+		
+//		Map<String, Object> map=new HashMap<String, Object>();
+//		map.put("dwmc", "山");
+//		map.put("dwbh", "0002");
+//		List<Map<String, Object>> users =UnitMapper.selectWhrMap(map);
+		
+		List<String> list=new ArrayList<>();
+		for(int i=1;i<3;i++) {
+			list.add("000"+i);
+		}
+		List<Map<String, Object>> users =UnitMapper.selectWhrList(list);
+		
+//		Map<String, Object> map=new HashMap<String, Object>();
+//		map.put("dwbh", "0001");
+//		map.put("list", list);
+//		List<Map<String, Object>> users =UnitMapper.selectWhrMapList(map);
+		
 		System.out.println(users.toString());
 	}
 	
