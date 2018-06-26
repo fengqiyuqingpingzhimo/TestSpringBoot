@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.demo.mapper.dao.UnitMapper;
 import com.example.demo.mapper.dao.UserMapper;
+import com.example.demo.model.Unit;
 
 /**  
 * @Title: Test.java  
@@ -55,18 +56,26 @@ public class Test {
 //		map.put("dwbh", "0002");
 //		List<Map<String, Object>> users =UnitMapper.selectWhrMap(map);
 		
-		List<String> list=new ArrayList<>();
-		for(int i=1;i<3;i++) {
-			list.add("000"+i);
-		}
-		List<Map<String, Object>> users =UnitMapper.selectWhrList(list);
+//		List<String> list=new ArrayList<>();
+//		for(int i=1;i<3;i++) {
+//			list.add("000"+i);
+//		}
+//		List<Map<String, Object>> users =UnitMapper.selectWhrList(list);
 		
 //		Map<String, Object> map=new HashMap<String, Object>();
 //		map.put("dwbh", "0001");
 //		map.put("list", list);
 //		List<Map<String, Object>> users =UnitMapper.selectWhrMapList(map);
 		
-		System.out.println(users.toString());
+//		System.out.println(users.toString());
+		
+//      ----------------------------------------------------------------------->
+//		System.err.println(this.UnitMapper.addUnit(new Unit("天涯海阁","0005")));
+//		System.out.println(UnitMapper.selectWhrDyn(new Unit("天涯海阁","0005")).toString());
+//		System.out.println(UnitMapper.selectWhrDynCho(null,null).toString());
+//		System.out.println(UnitMapper.selectWhrDynTrim(new Unit("1","天涯海阁","0005")).toString());
+//		System.out.println(UnitMapper.selectWhrBind(new Unit("1","天涯海阁","0005")).toString());
+		System.out.println(UnitMapper.SelectBuilderTest("门").toString());
 	}
 	
 
