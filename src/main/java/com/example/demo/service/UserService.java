@@ -59,5 +59,9 @@ public class UserService {
 	public User annSelectByPrimaryKey(String id) {
 		return userMapper.annSelectByPrimaryKey(id);
 	}
+	
+	public int updateByPrimaryKeySelective(User record) {
+		return userMapper.updateByPrimaryKeySelective(record);
+	}
 
 }

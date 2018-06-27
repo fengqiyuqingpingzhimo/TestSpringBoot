@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -54,8 +55,11 @@ public interface UserMapper {
     List<Map<String, Object>> getUserDwList();
     
 //    @Insert("INSERT INTO HYJ.SYS_USER (ID, LOGINNAME, PASSWORD,CREATETIME, BHPX, FLAG) VALUES (#{id},#{loginname},#{password},#{crearetime},#{bhpx},#{flag})")
-    @Insert("INSERT INTO HYJ.SYS_USER (ID, LOGINNAME, PASSWORD,CREATETIME, BHPX, FLAG) VALUES (SYS_GUID(),#{loginname},#{password},#{createtime},#{bhpx},#{flag})")
+    @Insert("INSERT INTO SYS_USER (ID, LOGINNAME, PASSWORD,CREATETIME, BHPX, FLAG,SSDW) VALUES (SYS_GUID(),#{loginname},#{password},#{createtime},#{bhpx},#{flag},#{ssdw})")
     int annInsert(User record);
+    
+    @Update("UPDATE SYS_USER SET SSDW=#{0} WHERE ID=#{1}")
+    int annUpdate(String ssdw,String id);
     
     @Select("SELECT * FROM SYS_USER WHERE ID=#{id}")
     @Cacheable(key ="#p0")//将查询结果缓存到redis中,（key="#p0"）指定传入的第一个参数作为redis的key。

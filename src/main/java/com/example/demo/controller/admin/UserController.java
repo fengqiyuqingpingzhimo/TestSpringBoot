@@ -159,8 +159,8 @@ public class UserController {
 	* @author wdm  
 	* @date 2018年4月14日  上午10:53:45
 	 */
-	@RequestMapping(value = "deluser", method = RequestMethod.GET)
-	public ResponseEntity<JsonResult> deluser (String gid){
+	@RequestMapping(value = "deluser/{id}", method = RequestMethod.GET)
+	public ResponseEntity<JsonResult> deluser (@PathVariable(value = "id")String gid){
 		JsonResult r = new JsonResult();
 		try {
 		   userService.delete(gid);
@@ -185,6 +185,33 @@ public class UserController {
 		System.err.println(user.toString());
 		try {
 			int orderId = userService.annInsert(user);
+			if (orderId < 0) {
+				r.setResult(orderId);
+				r.setStatus("fail");
+			} else {
+				r.setResult(orderId);
+				r.setStatus("ok");
+			}
+		} catch (Exception e) {
+			r.setResult(e.getClass().getName() + ":" + e.getMessage());
+			r.setStatus("error");
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(r);
+	}
+	/**
+	 * 修改用户信息
+	 * @Description: TODO
+	 * @author wdm  
+	 * @date 2018年6月25日  上午9:17:24
+	 * http://localhost/upduser?id=6F230F564092C365E050A8C0D90A1A70&loginname=修改
+	 */
+	@RequestMapping(value = "upduser", method = RequestMethod.GET)
+	public ResponseEntity<JsonResult> upduser (User user){
+		JsonResult r = new JsonResult();
+		System.err.println(user.toString());
+		try {
+			int orderId = userService.updateByPrimaryKeySelective(user);
 			if (orderId < 0) {
 				r.setResult(orderId);
 				r.setStatus("fail");

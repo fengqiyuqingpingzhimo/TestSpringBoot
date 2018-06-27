@@ -15,6 +15,8 @@ public class User {
     private BigDecimal bhpx;
 
     private String flag;
+    
+    private String ssdw;
 
     public String getId() {
         return id;
@@ -63,6 +65,20 @@ public class User {
     public void setFlag(String flag) {
         this.flag = flag == null ? null : flag.trim();
     }
+    
+	/**
+	 * @return the ssdw
+	 */
+	public String getSsdw() {
+		return ssdw;
+	}
+
+	/**
+	 * @param ssdw the ssdw to set
+	 */
+	public void setSsdw(String ssdw) {
+		this.ssdw = ssdw;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

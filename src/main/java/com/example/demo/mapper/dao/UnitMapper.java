@@ -3,6 +3,7 @@ package com.example.demo.mapper.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -44,6 +45,9 @@ public interface UnitMapper {
 	 
 	 //----------------------------------------------------------------------------->
 	 int addUnit(Unit unit);
+	 
+	 @Insert("INSERT INTO SYS_UNIT(GUID,DWMC,DWBH) VALUES (#{guid},#{dwmc},#{dwbh})")
+	 int annAddUnit(Unit unit);
 	 //----------------------------------------------------------------------------->
 	 @SelectProvider(type = SelectBuilderTest.class, method = "SelectBuilder")
 	 List<Map<String, Object>> SelectBuilderTest(String name);
