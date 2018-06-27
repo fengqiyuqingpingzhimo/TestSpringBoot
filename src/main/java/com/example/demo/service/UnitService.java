@@ -71,7 +71,9 @@ public class UnitService {
 		
 	}
 	
-	
+	public int addUnit(Unit unit) {
+		return this.unit.addUnit(unit);
+	}
 	
 
 }
