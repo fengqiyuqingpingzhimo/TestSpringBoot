@@ -121,12 +121,6 @@
 <!-- 		    <groupId>org.springframework.boot</groupId> -->
 <!-- 		    <artifactId>spring-boot-starter-log4j2</artifactId> -->
 <!-- 		</dependency> -->
-		<!-- 热启动  2018-3-15 11:15:59  wdm-->
-		<dependency>  
-            <groupId>org.springframework.boot</groupId>  
-            <artifactId>spring-boot-devtools</artifactId>  
-            <optional>true</optional>  
-        </dependency> 
         <!-- jsoup  网络爬虫工具 -->
         <dependency>
             <groupId>org.jsoup</groupId>
@@ -190,7 +184,13 @@
 		    <artifactId>vue-router</artifactId>
 		    <version>2.7.0</version>
 		</dependency>
-				<!-- 打包时不再使用嵌入式tomcat jar -->
+		<!-- 热启动  2018-3-15 11:15:59  wdm-->
+<!-- 		<dependency>   -->
+<!--             <groupId>org.springframework.boot</groupId>   -->
+<!--             <artifactId>spring-boot-devtools</artifactId>   -->
+<!--             <optional>true</optional>   -->
+<!--         </dependency>  -->
+		<!-- 打包时不再使用嵌入式tomcat jar -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -204,8 +204,25 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 	                <!-- 没有该配置，devtools 不生效     eclipse中是有效的啊  2018-3-15 13:44:43 wdm-->
-	                <fork>true</fork>
+	                <!-- 当系统采用springloaded热加载时,该值设置为false 否则会开启两个java运行线程 -->
+<!-- 	                <fork>false</fork> -->
+<!-- 	                -Xdebug是通知JVM工作在DEBUG模式下  -->
+<!-- 					-Xrunjdwp是通知JVM使用(java debug wire protocol)来运行调试环境。该参数同时了一系列的调试选项  -->
+<!-- 					transport指定了调试数据的传送方式,dt_socket是指用SOCKET模式  -->
+<!-- 					server参数是指是否支持在server模式的VM中  -->
+<!-- 					suspend指明，是否在调试客户端建立起来后，再执行VM，如果为y，那么当前的VM就是suspend直到有debug client连接进来才开始执行程序。 -->
+<!-- 					                 如果你的程序不是服务器监听模式并且很快就执行完毕的，那么可以选择在y来阻塞它的启动。  -->
+<!-- 					address=5005 调试服务器的端口号，客户端用来连接服务器的端口号。 -->
+<!-- 	                <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</jvmArguments> -->
                 </configuration>
+                <dependencies>
+                <!-- springloaded 热加载 -->
+				<dependency>
+					<groupId>org.springframework</groupId>
+					<artifactId>springloaded</artifactId>
+					<version>1.2.6.RELEASE</version>
+				</dependency>
+                </dependencies>
 			</plugin>
 			 <!-- mybatis generator 自动生成代码插件  找到该pom文件位置 执行 mvn mybatis-generator:generate  -->
             <plugin>
