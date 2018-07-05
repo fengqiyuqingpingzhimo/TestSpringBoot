@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**  
 * @Title: IndexController.java  
@@ -16,14 +17,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 * @version V1.0  
 */
 @Controller
+@RequestMapping("index")
 public class IndexController {
 	
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	
-    @GetMapping(value = "/")
+    @GetMapping
     public String index(HttpServletRequest request) {
     	logger.debug("系统默认访问页面!");
-        return "login";
+        return "index";
     }
 	
 

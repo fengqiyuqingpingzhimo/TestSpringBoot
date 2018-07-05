@@ -2,75 +2,108 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Wangdm</title>
+<!--     <title>Wangdm</title> -->
 <!-- 引入样式 -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<link rel="stylesheet" th:href="@{/plugins/element-ui/2.4.2/index.css}">
+<link rel="stylesheet" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}">
 <style>
-  .el-row {
-    margin-bottom: 20px;
-    text-align:center;
-    line-height:36px;
-    &:last-child {
-      margin-bottom: 0;
-    }
+  .el-form-item:last-child {
+    margin-bottom: 0;
   }
-  .el-col {
-    border-radius: 4px;
-  }
-  .bg-purple-dark {
-    background: #99a9bf;
-  }
-  .bg-purple {
-    background: #d3dce6;
-  }
-  .bg-purple-light {
-    background: #e5e9f2;
-  }
-  .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
-  }
-  .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
-  }
+ button.submit{width: 100%;}
+ .logincontainer{border: 1px solid #d8dee2;margin-top: 100px;}
+ .errorContainer{position: relative;top: -330px;background-color: #ffdce0;}
 </style>
 </head>
 <body>
 <div id="app">
-<el-row>
-  <el-col :span="24" hidden-xs-only><div class="grid-content bg-purple-dark">24</div></el-col>
+<el-row type="flex" class="row-bg" justify="center">
+  <el-col :xs="24" :sm="20" :md="12" :lg="8" :xl="5">
+   <el-card shadow="always" class="logincontainer">
+    <div slot="header" class="clearfix">
+     <span>选课走班管理系统</span>
+    </div>
+    <el-form ref="form" :model="form" label-width="80px" auto-complete="off" action="" method="post">
+	  <el-form-item label-width="0">
+		  <el-input placeholder="登录账号" v-model="form.loginname" auto-complete="off" name="username">
+		    <template slot="prepend"><i class="fa fa-user"></i></template>
+		  </el-input>
+	  </el-form-item>
+	  <el-form-item label-width="0">
+		  <el-input placeholder="登录密码" v-model="form.password" type="password" auto-complete="off" name="password">
+		    <template slot="prepend"><i class="fa fa-lock"></i></template>
+		  </el-input>
+	  </el-form-item>
+	  <el-form-item label-width="0">
+<!-- 	    <el-button type="primary" @click="onSubmit" class="submit" :loading="form.loading" native-type="submit">{{form.text}}</el-button> -->
+            <el-button type="primary" @click="onSubmit" class="submit" :loading="form.loading">{{form.text}}</el-button>
+	  </el-form-item>
+	</el-form>  
+ </el-card>	
+ <template>
+  <el-alert class="errorContainer" title="登录失败" type="error" show-icon :description="form.errorMsg" v-show="form.error"></el-alert>
+ </template>
+  </el-col>
 </el-row>
-<el-row>
-  <el-col :span="12"><div class="grid-content bg-purple">12</div></el-col>
-  <el-col :span="12"><div class="grid-content bg-purple-light">12</div></el-col>
-</el-row>
-<el-row>
-  <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="8"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-</el-row>
-<el-row>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-</el-row>
-<el-row>
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-</el-row>
+错误信息：<h4 th:text="${msg}"></h4>
+<form action="" method="post">
+    <p>账号：<input type="text" name="username" value="admin" /></p>
+    <p>密码：<input type="text" name="password" value="123456"/></p>
+    <p><input type="submit" value="登录"/></p>
+</form>
+
 </div>
-<script th:src="@{/vue/Vue.js}"></script>
+<script th:src="@{/plugins/vue/Vue.js}"></script>
 <!-- 引入组件库 -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script th:src="@{/plugins/element-ui/2.4.2/index.js}"></script>
+<script th:src="@{/plugins/axios/0.18.0/axios.js}"></script>
 <script>
 new Vue({
-    el: '#app'
+    el: '#app',
+    data() {
+        return {
+          form: {
+        	  loginname: '',
+              loading:false,
+              text:'用户登录',
+              password: '',
+              error:false,
+              errorMsg:''
+          }
+        }
+      },
+      methods: {
+        onSubmit() {
+        	this.form.loading=true;
+        	this.form.text='登录中...';
+        	console.log(this.form.loginname);
+            console.log(this.form.password);
+            if(this.form.loginname==''){
+            	this.form.error=true;
+            	this.form.errorMsg='账号不能为空!';
+            	this.form.loading=false;
+            	this.form.text='用户登录';
+            	return;
+            }
+            if(this.form.password==''){
+            	this.form.error=true;
+            	this.form.errorMsg='密码不能为空!';
+            	this.form.loading=false;
+            	this.form.text='用户登录';
+            	return;
+            }
+            axios.get('/login', {
+            	username: this.form.loginname,
+                 password: this.form.password
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+        }
+      }
   })
 
 </script>
