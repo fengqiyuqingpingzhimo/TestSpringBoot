@@ -27,6 +27,7 @@ public class DateConverterConfig {
 	        formarts.add("yyyy-MM-dd");
 	        formarts.add("yyyy-MM-dd hh:mm");
 	        formarts.add("yyyy-MM-dd hh:mm:ss");
+	        formarts.add("yyyy/MM/dd hh:mm:ss");
 	    }
 	    
 		@Bean
@@ -46,8 +47,10 @@ public class DateConverterConfig {
 	        	            return parseDate(source, formarts.get(2));
 	        	        }else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}:\\d{1,2}$")){
 	        	            return parseDate(source, formarts.get(3));
+	        	        }else if(source.matches("^\\d{4}/\\d{1,2}/\\d{1,2} {1}\\d{1,2}:\\d{1,2}:\\d{1,2}$")){
+	        	            return parseDate(source, formarts.get(4));
 	        	        }else {
-	        	            throw new IllegalArgumentException("Invalid boolean value '" + source + "'");
+	        	            throw new IllegalArgumentException("无法匹配的值: '" + source + "'");
 	        	        }
 	                } catch (Exception e) {
 	                    e.printStackTrace();

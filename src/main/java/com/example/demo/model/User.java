@@ -106,6 +106,16 @@ public class User {
 		this.bhpx = bhpx;
 		this.flag = flag;
 	}
+    
+	/**
+	 * @param loginname
+	 * @param password
+	 */
+	public User(String loginname, String password) {
+		super();
+		this.loginname = loginname;
+		this.password = password;
+	}
 
 	/**
 	 * 

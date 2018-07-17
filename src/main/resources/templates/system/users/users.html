@@ -12,26 +12,10 @@ IMG{max-width: 50px;}
 <body>
         <dl>
              <dt> name</dt>
-             <dd th:text="${bean.author}">Red Chair</dd>
- 
+             <dd th:text="${bean.author}">默认作者</dd>
              <dt> time</dt>
-<!--              <dd th:text="${bean.time}">350</dd> -->
-<dd th:text="${#dates.format(bean.time, 'yyyy-MM-dd')}">350</dd>
- 
-<!--              <dt>Product available from</dt> -->
-<!--              <dd th:text="${product.availableFrom}">2014-12-01</dd> -->
+             <dd th:text="${#dates.format(bean.time, 'yyyy-MM-dd')}">默认时间</dd>
         </dl>
-   <span th:text="${'author:'+author}">王得民</span>
-   <p class="answer" th:text="${new java.util.Date().getTime()}">22-Jun-2013</p>
-   <p class="answer" th:text="${list[6].key}">22-Jun-2013</p>
-   <p th:text="${html}"></p>
-   <p th:utext="${html}"></p>
-   <table>
-    <thead><tr><th>序号</th><th>key</th><th>val</th></tr></thead>
-    <tbody>
-    <tr th:each="list:${list}"> <td th:text="${listStat.count}">1</td><td th:text="${list.key}"></td><td th:text="${list.val}"></td></tr>
-    </tbody>
-   </table>
    <hr/>
    <table>
     <thead><tr><th>序号</th><th>编号</th><th>名称</th><th>密码</th><th>创建时间</th><th>编号排序</th><th>人员类型</th><th>操作相关</th></tr></thead>
@@ -48,7 +32,6 @@ IMG{max-width: 50px;}
 	       <img th:case="'TWO'" src="" th:src="@{/img/2.png}">
 	       <span th:case="*">Unknown</span>
 	    </td>
-<!-- 	    > , < , >= , <= ( gt , lt , ge , le ) -->
 	    <td> <span th:if="${list.bhpx lt 3}" class="offer">测试!</span></td>
     </tr>
      <tr> 

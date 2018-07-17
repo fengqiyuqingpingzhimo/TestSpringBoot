@@ -33,6 +33,9 @@ public interface UserMapper {
     @Cacheable(key ="#p0")//将查询结果缓存到redis中，（key="#p0"）指定传入的第一个参数作为redis的key。  //spel表达式
     User selectByPrimaryKey(String id);
     
+    @Select("SELECT * FROM SYS_USER WHERE LOGINNAME=#{0}")
+    User selectByLoginName(String loginname);
+    
 //    @CachePut(key="'ot6r2g72fyCdGSLa0tyJmo4g4XiKqp4A'")
 //    @CachePut( key = "#p0.id") 
 //    @Cacheable(key ="'cs_'+#p0.id")

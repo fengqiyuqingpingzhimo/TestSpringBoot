@@ -8,9 +8,12 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
 
 public class TextFilter implements Filter {
 	
@@ -26,9 +29,11 @@ public class TextFilter implements Filter {
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		 long start = System.currentTimeMillis();
-
 		 arg2.doFilter(request, arg1);
-		 logger.info("TextFilter过滤时间耗时监控,使用时间:{}",System.currentTimeMillis() - start);
+		 HttpServletRequest re=((HttpServletRequest)request);
+		 String visitPath=re.getServletPath();
+//		 System.err.println(new Gson().toJson(re.getParameterMap()));
+		 logger.info("TextFilter过滤时间耗时监控,使用时间:{},转接路径:{}",System.currentTimeMillis() - start,visitPath);
 	}
 
 	@Override

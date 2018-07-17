@@ -106,10 +106,8 @@ function yolo( vertices, size, _w, _h ){
 
 var size = 1024;
 var canvas = document.createElement('canvas');
-canvas.style.position ="absolute";
-canvas.style.top ="0";
-canvas.style.left ="0";
 canvas.width = canvas.height = size;
+canvas.style.cssText = "position:absolute;top:0;left:0;z-index:-2;opacity:0.8";
 ctx = canvas.getContext('2d');
 document.body.appendChild( canvas );
 
@@ -154,11 +152,11 @@ function update(){
     canvas.height = window.innerHeight;
 
     ctx.globalAlpha = 1;
-    ctx.fillStyle = "#000";
+    ctx.fillStyle = "#FFF";
     ctx.fillRect( 0,0, canvas.width, canvas.height );
-    ctx.translate( canvas.width/2,canvas.height/2 );
+    ctx.translate( canvas.width/2,canvas.height/2);
 
-    ctx.strokeStyle = "#FFF";
+    ctx.strokeStyle = "#777";
 
     var m = size/2;
     for( i = 8; i <= m; i *= 2 ){

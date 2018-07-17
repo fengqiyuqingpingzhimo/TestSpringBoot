@@ -1,9 +1,6 @@
 package com.example.demo.config;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -12,7 +9,6 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.converter.HttpMessageConverter;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -68,7 +64,6 @@ public class WebConfig {
 	    List<String> urls = new ArrayList<>();
 	    urls.add("/*");
 	    registrationBean.setUrlPatterns(urls);
-	    
 	    return registrationBean;
 	}
 	/**
@@ -110,25 +105,4 @@ public class WebConfig {
         pageHelper.setProperties(properties);
         return pageHelper;
     }
-	/**
-	 * @Description: 日期变量的值自动映射为java日期格式
-	 * @author wdm  
-	 * @date 2018年6月21日  下午4:31:17
-	 */
-//	@Bean
-//    public Converter<String, Date> addNewConvert() {
-//        return new Converter<String, Date>() {
-//            @Override
-//            public Date convert(String source) {
-//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//                Date date = null;
-//                try {
-//                    date = sdf.parse((String) source);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                return date;
-//            }
-//        };
-//    }
 }
