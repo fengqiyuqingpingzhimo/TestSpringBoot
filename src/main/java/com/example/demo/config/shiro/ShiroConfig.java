@@ -46,7 +46,8 @@ public class ShiroConfig {
 		shiroFilterFactoryBean.setSecurityManager(securityManager);//安全管理器
 		Map<String, Filter> filters=shiroFilterFactoryBean.getFilters();
 		filters.put("ShiroLoginFilter", shiroLoginFilter());//自定义shiro登录过滤器
-		filters.put("perms", new ShiroPermissionsFilter());
+		filters.put("ShiroPermissionsFilter", new ShiroPermissionsFilter());//自定义shiro权限过滤器
+		filters.put("ShiroLogoutFilter", new ShiroLogoutFilter());//自定义shiro退出登录过滤器
 		Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
 		filterChainDefinitionMap.put("/login", "ShiroLoginFilter");//配置自定义过滤器**
 		filterChainDefinitionMap.put("/favicon.ico", "anon");
@@ -57,10 +58,11 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/test/**", "anon");
 		filterChainDefinitionMap.put("/error/**", "anon");
 		filterChainDefinitionMap.put("/static/**", "anon");// 配置不会被拦截的链接 顺序判断
-		filterChainDefinitionMap.put("/logout", "logout");//配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
+//		filterChainDefinitionMap.put("/logout", "logout");//配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
+		filterChainDefinitionMap.put("/logout", "ShiroLogoutFilter");
 		//权限配置
-		filterChainDefinitionMap.put("/index", "authc,perms[admin1,admin2,admin]");
-		filterChainDefinitionMap.put("/thymeleaf", "authc,perms[admin,list1]");
+		filterChainDefinitionMap.put("/index", "authc,ShiroPermissionsFilter[admin1,admin2,admin]");
+		filterChainDefinitionMap.put("/thymeleaf", "authc,ShiroPermissionsFilter[admin,list1]");
 		//<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边  ,authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问 -->
 		filterChainDefinitionMap.put("/**", "authc");
 		shiroFilterFactoryBean.setLoginUrl("/login");// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
@@ -102,19 +104,4 @@ public class ShiroConfig {
 		shiroFilter.setPasswordParam("password");
         return shiroFilter;
     }
-
-//	@Bean(name="simpleMappingExceptionResolver")
-//	public SimpleMappingExceptionResolver
-//	createSimpleMappingExceptionResolver() {
-//		SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
-//		Properties mappings = new Properties();
-//		mappings.setProperty("DatabaseException", "databaseError");//数据库异常处理
-//		mappings.setProperty("UnauthorizedException","403");
-//		r.setExceptionMappings(mappings);  // None by default
-//		r.setDefaultErrorView("error");    // No default
-//		r.setExceptionAttribute("ex");     // Default is "exception"
-//		//r.setWarnLogCategory("example.MvcLogger");     // No default
-//		return r;
-//	}
-
 }

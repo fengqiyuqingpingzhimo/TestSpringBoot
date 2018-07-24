@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.util.JsonResult;
@@ -44,6 +45,19 @@ public class TestController {
 		JsonResult r = new JsonResult();
 		r.setResult("测试数据反馈!");
 		r.setStatus("ok");
+		return ResponseEntity.ok(r);
+    }
+	
+	@PostMapping("t")
+    public ResponseEntity<JsonResult> t(HttpServletRequest request) {
+		System.err.println(request.getParameter("a"));
+		logger.debug("用户在线中,重复发送了登录请求!");
+		JsonResult r = new JsonResult();
+		//String exception = (String) request.getAttribute("shiroLoginFailure");
+	//	logger.debug("获取shiro异常类名称:{}",exception);
+		String msg = "cssss",status="ok";
+		r.setResult(msg);
+		r.setStatus(status);
 		return ResponseEntity.ok(r);
     }
 

@@ -38,7 +38,7 @@ public class IndexController {
         map.put("list", getData());
         map.put("data", this.service.getUserList());
         map.put("html", "<div>This is an <em>HTML</em> text. <b>Enjoy yourself!</b></div>");
-        return "system/users/users";
+        return "index";
     }
 	
 	private List<Map<String, Object>> getData(){

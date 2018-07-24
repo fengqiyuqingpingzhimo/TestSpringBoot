@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Xy</title>
+<!--     <link rel="stylesheet"  th:href="@{}" />   -->
+</head>
+<body>
+<div id="p">
+   <div class="test">测试</div>
+   <div id="test">测试</div>
+   <div class="test">测试</div>
+   </div>
+   <input type="button" value="测试" >
+ <script src="/plugins/jquery/jquery-1.11.2.min.js"></script> 
+ <script type="text/javascript">
+ $("#p").find("div").eq(0).css({"color":"red"})
+ 
+ $("input").click(function(){
+	 alert(131)
+ });
+ $.ajax({
+		type:"post",
+		url:"/test/t",
+		data:{"a":"a12313"},
+		dataType:'json',
+		success:function(val){
+			console.log(val)
+		},
+		error:function(val){
+			
+		},
+		beforeSend:function(val){
+        
+			
+		}
+	});
+ //1.如何选择元素
+ //2.给元素发送指令  比如让这个元素变色等
+ //3. 元素事件监听 
+ //4. ajax
+ </script>
+</body>
+</html>

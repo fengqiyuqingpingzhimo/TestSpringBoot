@@ -4,8 +4,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -36,11 +34,12 @@ public class LoginController {
 	/**当用户已经登录时,再次发送登录请求,shiro不在做处理,需要该类去正确响应**/
 	@PostMapping("")
     public ResponseEntity<JsonResult> loginPost(HttpServletRequest request) {
+		System.err.println(request.getParameter("a"));
 		logger.debug("用户在线中,重复发送了登录请求!");
 		JsonResult r = new JsonResult();
-		String exception = (String) request.getAttribute("shiroLoginFailure");
-		logger.debug("获取shiro异常类名称:{}",exception);
-		String msg = "",status="ok";
+		//String exception = (String) request.getAttribute("shiroLoginFailure");
+	//	logger.debug("获取shiro异常类名称:{}",exception);
+		String msg = "cssss",status="ok";
 		r.setResult(msg);
 		r.setStatus(status);
 		return ResponseEntity.ok(r);

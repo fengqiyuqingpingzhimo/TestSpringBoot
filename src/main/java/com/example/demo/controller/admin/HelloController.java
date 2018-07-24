@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +29,7 @@ public class HelloController {
 	 }  
 	 
 	 @RequestMapping(value="data", method=RequestMethod.GET)  
-	 public List<Map<String, Object>> getData(){
+	 public List<Map<String, Object>> getData(HttpServletResponse r){
 		 List<Map<String, Object>> data=new ArrayList<Map<String, Object>>();
 		 for(int i=0;i<10;i++) {
 			 Map<String, Object> map =new HashMap<String, Object>();
@@ -35,6 +37,7 @@ public class HelloController {
 			 map.put("value", "value_"+i);
 			 data.add(map);
 		 }
+		 r.setHeader("testHeader", "Wangdm");
 		 return data;
 	 }
 	 

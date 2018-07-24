@@ -8,7 +8,7 @@
 <link rel="stylesheet" th:href="@{/plugins/element-ui/2.4.2/index.css}">
 <link rel="stylesheet" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}">
 <style>
-.el-form-item:last-child {margin-bottom: 0;}
+.el-form-item:last-child ,.el-form-item:nth-last-child(2){margin-bottom: 0;}
 button.submit{width: 100%;}
 .logincontainer{border: 1px solid #d8dee2;margin-top: 100px;}
 .errorContainer{position: relative;top: -330px;background-color: #ffdce0;}
@@ -42,6 +42,7 @@ button.submit{width: 100%;}
     background: url(/img/login_bg.png) center no-repeat;
     position: relative;
 }
+.pull-right:{float: right;}
 </style>
 </head>
 <body>
@@ -68,6 +69,11 @@ button.submit{width: 100%;}
 		  <el-input placeholder="登录密码" v-model="form.password" type="password" auto-complete="off" name="password">
 		    <template slot="prepend"><i class="fa fa-lock"></i></template>
 		  </el-input>
+	  </el-form-item>
+	  <el-form-item label-width="0">
+		  <template>
+			  <el-checkbox v-model="form.rememberMe" class="pull-right">记住我</el-checkbox>
+		  </template>
 	  </el-form-item>
 	  <el-form-item label-width="0">
 <!-- 	    <el-button type="primary" @click="onSubmit('form')" class="submit" :loading="form.loading">{{form.text}}</el-button> -->
@@ -97,7 +103,8 @@ new Vue({
               text:'用户登录',
               password: '',
               error:false,
-              errorMsg:''
+              errorMsg:'',
+              rememberMe:false
           }
         }
       },
@@ -120,7 +127,7 @@ new Vue({
             	this.form.text='用户登录';
             	return;
             }
-            var $username=this.form.loginname,$password=this.form.password	;
+            var $username=this.form.loginname,$password=this.form.password,$rememberMe=this.form.rememberMe;
             var $form=this.form;
             var instance = axios.create({
             	  timeout: 10000,
@@ -137,7 +144,7 @@ new Vue({
             instance.request({
            	  method: 'post',
            	  url: '/login',
-           	  data: {username: $username,password: $password}
+           	  data: {username: $username,password: $password,rememberMe:$rememberMe}
            	}).then(function (response) {
                 console.log(response);
                 var data=response.data;

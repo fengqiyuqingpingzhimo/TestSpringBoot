@@ -9,7 +9,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 import org.apache.shiro.web.util.WebUtils;
@@ -81,7 +80,8 @@ public class ShiroPermissionsFilter extends AuthorizationFilter {
 				 return false;
 			}else {
 				System.err.println("当前登录者标识:"+subject.getPrincipals().getPrimaryPrincipal());
-				//方法一:通过数据库查询登录者的全部角色(该查询比较频繁,加入缓存机制)////方法二:当执行doGetAuthenticationInfo直接把用户的角色权限信息存入subject中
+				//方法一:通过数据库查询登录者的全部角色(该查询比较频繁,需要加入缓存机制)//
+				//方法二:当执行doGetAuthenticationInfo直接把用户的角色权限信息存入subject中,存在需要重新登录获取新权限的问题
 				//和该路径能够访问的预设角色对比 并返回结果
 			}
 			return true;
