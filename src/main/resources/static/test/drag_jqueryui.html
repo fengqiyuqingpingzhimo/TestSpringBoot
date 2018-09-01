@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Xy</title>
+    <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+  <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <style>
+  #draggable, #draggable2 { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+  #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+  </style>
+  <script>
+  $(function() {
+    $( "#draggable" ).draggable({ revert: "valid" });
+    $( "#draggable2" ).draggable({ revert: "invalid" });
+ 
+    $( "#droppable" ).droppable({
+      activeClass: "ui-state-default",
+      hoverClass: "ui-state-hover",
+      drop: function( event, ui ) {
+        $( this )
+          .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "已放置！" );
+      }
+    });
+  });
+  </script>
+</head>
+<body style="overflow: hidden;">
+  <div id="draggable" class="ui-widget-content">
+  <p>当被放置在目标上时还原</p>
+</div>
+ 
+<div id="draggable2" class="ui-widget-content">
+  <p>当未被放置在目标上时还原</p>
+</div>
+ 
+<div id="droppable" class="ui-widget-header">
+  <p>请放置在这里</p>
+</div>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

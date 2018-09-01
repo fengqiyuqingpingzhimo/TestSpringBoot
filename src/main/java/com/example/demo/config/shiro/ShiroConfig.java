@@ -55,6 +55,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/img/**", "anon");
 		filterChainDefinitionMap.put("/js/**", "anon");
 		filterChainDefinitionMap.put("/plugins/**", "anon");
+		filterChainDefinitionMap.put("/websocket/**", "anon");
 		filterChainDefinitionMap.put("/test/**", "anon");
 		filterChainDefinitionMap.put("/error/**", "anon");
 		filterChainDefinitionMap.put("/static/**", "anon");// 配置不会被拦截的链接 顺序判断

@@ -1,0 +1,309 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="jquery,ui,easy,easyui,web">
+	<meta name="description" content="easyui help you build your web page easily!">
+	<title>jQuery EasyUI Demo</title>
+<!-- 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css"> -->
+<!-- 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css"> -->
+<!-- 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script> -->
+<!-- 	<script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.easyui.min.js"></script> -->
+	<link rel="stylesheet" href="/plugins/jquery-ui-1.12.1/jquery-ui.min.css">
+  <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/plugins/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+	<style type="text/css">
+		.left{
+			width:120px;
+			float:left;
+		}
+		.left table{
+			background:#E0ECFF;
+		}
+		.left td{
+			background:#eee;
+		}
+		.right{
+			float:right;
+			width:600px;
+		}
+		.right table{
+			background:#E0ECFF;
+			width:100%;
+		}
+		.right td{
+			background:#fafafa;
+			text-align:center;
+			padding:2px;
+		}
+		.right td{
+			background:#E0ECFF;
+		}
+		.right td.drop{
+			background:#fafafa;
+			width:100px;
+		}
+		.right td.over{
+			background:#FBEC88;
+		}
+		.item{
+			text-align:center;
+			border:1px solid #499B33;
+			background:#fafafa;
+			width:100px;
+		}
+		.assigned{
+			border:1px solid #BC2A4D;
+		}
+		div{
+			/*直角变成圆角*/
+			border-radius:5px;
+		}
+		body{
+			/*实现页面放大效果(原页面的多少倍)*/
+/* 			transform:scale(1.5); */
+		}
+		.red:after {
+	content: '禁止防止'
+}
+		
+	</style>
+	<!--   总结：
+		draggable主要功能是【拖拽】
+			在拖动目标上触发事件 (源元素):
+			ondragstart - 用户开始拖动元素时触发
+			ondrag - 元素正在拖动时触发
+			ondragend - 用户完成元素拖动后触发
+		droppable主要功能是【放置】
+			释放目标时触发的事件:
+			ondragenter - 当被鼠标拖动的对象进入其容器范围内时触发此事件
+			ondragover - 当某被拖动的对象在另一对象容器范围内拖动时触发此事件
+			ondragleave - 当被鼠标拖动的对象离开其容器范围内时触发此事件
+			ondrop - 在一个拖动过程中，释放鼠标键时触发此事件
+	-->
+	<script>
+	//需要实现的功能
+	//① 某些单元格需要禁止放置
+	//② 课目拖拽放置完后要删除该课目
+	//③ 已经放置的课目可以再次被拖拽 
+	//④ 已经放置的课目可以删除(删除后需要重现显示在课目容器内)
+	//⑤ 当课目被放置在某个单元格前添加询问功能,如果否,则不放置
+	//⑥ 课程拖动只允许在固定容易内
+		$(function(){
+ 
+			/**左  -->  右(复制)【拖动策略】*/
+			$('.left .item').draggable({
+				  cancel: "a.ui-icon", // 点击一个图标不会启动拖拽
+			      revert: "invalid", // 当未被放置时，条目会还原回它的初始位置
+			      containment: "#container",//6
+			      helper: "clone",
+			      cursor: "move"
+			});
+ 
+			remove();
+ 
+			$('.right td.drop').not(".red").droppable({
+				accept : '.item',//只允许操作class为item的标签
+				hoverClass: "over",
+	            drop: function( e, source ) {
+		            var $this=$(this),$item=source.draggable,$container=$item.parents("tr");
+	            	 //如果上一个单元格与当前单元格为同一个 不在触发下面事件
+	            	 if( $this.is($item.parents("td"))){
+	            		 console.log('同一个单元格');
+	            		 return;
+	            	 }
+	            	 if(confirm("该位置较差,需要放置吗？")){//5
+	            		 //开启数据库存入
+	            		 //callback : true
+	            	    if($item.hasClass("showkc")){
+	            	    	$container=$item;
+	            	    }
+	            	    $container.fadeOut(function() {
+		    		        $item.addClass("showkc").appendTo( $this.empty() ).fadeIn();
+		    		     });
+	            	 }
+					//this指的是td
+// 					//source指的是正在拖动的div
+// 					$(this).removeClass('over');
+// 					if ($(source).hasClass('assigned')){
+// 						//alert($(this).find("div").html());//jQuery 遍历 - find() 方法
+						
+// 						/**替换************************************************/
+// 						$(this).empty().append(source);//替换
+						
+// 						/**添加************************************************/
+// //						if($(this).find("div").html() != $(source).html()){
+// //							$(this).append(source);//添加
+// //						}else{
+// //							return null;
+// //						}
+ 
+// 					} else {
+// 						console.log(source)
+// 						var c = source.draggable.clone().addClass('assigned');
+// // var c = $( "<li></li>" ).text( source.draggable )
+// 						/**替换************************************************/
+// 						$(this).empty().append(c);//替换
+						
+// 						/**添加************************************************/
+// //						if($(this).find("div").html() != $(c).html()){
+// //							$(this).append(c);//添加
+// //						}else{
+// //							return null;
+// //						}
+ 
+// 						c.draggable({
+// 							revert:true
+// 						});
+					}
+				});
+			});
+// 		function deleteImage( $item ) {
+// 		      $item.fadeOut(function() {
+// 		        var $list = $( "ul", $trash ).length?$( "ul", $trash ):$( "<ul class='gallery ui-helper-reset'/>" ).appendTo( $trash );
+// 		        $item.find( "a.ui-icon-trash" ).remove();
+// 		        $item.appendTo( $list ).fadeIn();
+// 		      });
+// 		    }
+		function remove(){
+			/**右  -->  左(移除)*/
+			$('.right div').draggable({
+				revert:true,
+			});
+			$('.left').droppable({
+				accept : '.assigned',
+				onDragEnter : function(e, source) {
+					$(source).addClass('trash');
+				},
+				onDragLeave : function(e, source) {
+					$(source).removeClass('trash');
+				},
+				onDrop : function(e, source) {
+					$(source).remove();
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+<center><h1>Course</h1></center>
+<!-- jQuery easyUI拖动效果 -->
+<hr>
+<center>
+	<div style="width:750px;    height: 500px;" id="container">
+		<div class="left">
+			<table>
+				<tr>
+					<td><div class="item">English</div></td>
+				</tr>
+				<tr>
+					<td><div class="item">Science</div></td>
+				</tr>
+				<tr>
+					<td><div class="item">Music</div></td>
+				</tr>
+				<tr>
+					<td><div class="item">History</div></td>
+				</tr>
+				<tr>
+					<td><div class="item">Computer</div></td>
+				</tr>
+				<tr>
+					<td><div class="item">Mathematics</div></td>
+				</tr>
+				<tr>
+					<td><div class="item">Arts</div></td>
+				</tr>
+				<tr>
+					<td><div class="item">Ethics</div></td>
+				</tr>
+				<tr>
+					<td><div class="item">Biology</div></td>
+				</tr>
+				<tr>
+					<td><div class="item">Geography</div></td>
+				</tr>
+			</table>
+		</div>
+		<div class="right">
+			<table>
+				<tr>
+					<td class="blank"></td>
+					<td class="title">Monday</td>
+					<td class="title">Tuesday</td>
+					<td class="title">Wednesday</td>
+					<td class="title">Thursday</td>
+					<td class="title">Friday</td>
+				</tr>
+				<tr>
+					<td class="time">08:00</td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+				</tr>
+				<tr>
+					<td class="time">09:00</td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+				</tr>
+				<tr>
+					<td class="time">10:00</td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+				</tr>
+				<tr>
+					<td class="time">11:00</td>
+					<td class="drop red"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+				</tr>
+				<tr>
+					<td class="time">12:00</td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+				</tr>
+				<tr>
+					<td class="time">13:00</td>
+					<td class="lunch" colspan="5">Lunch</td>
+				</tr>
+				<tr>
+					<td class="time">14:00</td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+				</tr>
+				<tr>
+					<td class="time">15:00</td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+				</tr>
+				<tr>
+					<td class="time">16:00</td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+					<td class="drop"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</center>
+</body>

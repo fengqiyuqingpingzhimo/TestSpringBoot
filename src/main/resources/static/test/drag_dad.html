@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Xy</title>
+    <link rel="stylesheet" href="/plugins/drag/jquery.dad.js/demo/bootstrap.css">
+    <link rel="stylesheet" href="/plugins/drag/jquery.dad.js/demo/font/stylesheet.css">
+    <link rel="stylesheet" href="/plugins/drag/jquery.dad.js/demo/demo.css">
+    <link rel="stylesheet" href="/plugins/drag/jquery.dad.js/source/jquery.dad.css">
+</head>
+<body style="overflow: hidden;">
+   <div id="daddy" class="dad">
+        <div>
+            <div>1</div>
+        </div>
+        <div>
+            <div>2</div>
+        </div>
+        <div>
+            <div>3</div>
+        </div>
+        <div>
+            <div>4</div>
+        </div>
+        <div>
+            <div>5</div>
+        </div>
+    </div>
+    <div class="row ">
+         <div class="col-xs-12 ">
+              <table class="table table-bordered table-striped">
+                <tr><td height="40" class="dropzone"></td>
+                    <td height="40" class="dropzone"></td>
+                    <td height="40" class="dropzone"></td>
+                </tr>
+              </table>
+             <div class="dropzone"></div>
+         </div>
+     </div>
+<script src="/plugins/drag/jquery.dad.js/demo/jquery.min.js"></script>
+<script src="/plugins/drag/jquery.dad.js/source/jquery.dad.js"></script>
+<script type="text/javascript">
+
+// $('.dad').dad().addDropzone('.dropzone', function (e) {
+// 	e.find("div").appendTo($(this));
+//     e.remove();
+// });;
+
+$(function(){ 
+	var d = $('.dad').dad();
+	var target = $('.dropzone');
+
+	d.addDropzone(target, function(e){
+		console.log(e)
+		e.find('div').appendTo(target);
+		e.remove();
+	});
+});
+</script>
+</body>
+</html>
