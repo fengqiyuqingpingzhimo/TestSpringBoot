@@ -4,9 +4,9 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.jms.annotation.EnableJms;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@ServletComponentScan //配置druid必须加的注解，如果不加，访问页面打不开，filter和servlet、listener之类的需要单独进行注册才能使用，
                       // spring boot里面提供了该注解起到注册作用（拦截和登录配置可以用@bean配置）
 @EnableCaching   //开启缓存
+@EnableJms  //开启 jms能力
 @EnableTransactionManagement //如果mybatis中service实现类中加入事务注解，需要此处添加该注解
 @MapperScan("com.example.demo.mapper") //扫描mybatis mapper
 public class Application extends SpringBootServletInitializer {

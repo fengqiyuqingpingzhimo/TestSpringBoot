@@ -9,16 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 
 public class TestServlet extends HttpServlet {
 	
-	 @Override
-	    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	        doPost(req, resp);
-	    }
+	private static final long serialVersionUID = 1L;
 
-	    @Override
-	    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	        resp.setContentType("text/html;charset=utf-8");
-	        resp.getWriter().write("自定义 Servlet");
-	    }
+	@Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=utf-8");
+        resp.getWriter().write("自定义 Servlet");
+    }
 	
 
 }

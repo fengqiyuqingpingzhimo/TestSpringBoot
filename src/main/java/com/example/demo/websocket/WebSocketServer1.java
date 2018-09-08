@@ -15,6 +15,8 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**  
 * @Title: WebSocketServer1.java  
@@ -27,7 +29,7 @@ import org.springframework.stereotype.Component;
 @ServerEndpoint(value = "/webSocketServer/{userName}")
 @Component
 public class WebSocketServer1 {
-	
+	 private static final Logger logger = LoggerFactory.getLogger(WebSocketServer1.class);
 	 private static final Set<WebSocketServer1> connections = new CopyOnWriteArraySet<>();
 
 	    private String nickname;
@@ -44,6 +46,7 @@ public class WebSocketServer1 {
 	        this.session = session;
 	        connections.add(this);
 	        String message = String.format("* %s %s", nickname, "加入聊天！");
+	        logger.debug("@OnOpen：{}",message);
 	        broadcast(message);
 	    }
 
@@ -51,11 +54,13 @@ public class WebSocketServer1 {
 	    public void end() {
 	        connections.remove(this);
 	        String message = String.format("* %s %s", nickname, "退出聊天！");
+	        logger.debug("@OnClose：{}",message);
 	        broadcast(message);
 	    }
 
 	    @OnMessage
 	    public void pushMsg(String message) {
+	    	logger.debug("@OnMessage：{}",message);
 	        broadcast("【" + this.nickname + "】" + getDatetime(new Date()) + " : " + message);
 	    }
 
@@ -67,6 +72,7 @@ public class WebSocketServer1 {
 	    private static void broadcast(String msg) {
 	        // 广播形式发送消息
 	        for (WebSocketServer1 client : connections) {
+	        	logger.debug("broadcast==>user：{}",client.nickname);
 	            try {
 	                synchronized (client) {
 	                    client.session.getBasicRemote().sendText(msg);

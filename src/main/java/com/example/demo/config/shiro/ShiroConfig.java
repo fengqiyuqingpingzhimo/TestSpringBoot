@@ -58,6 +58,8 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/websocket/**", "anon");
 		filterChainDefinitionMap.put("/test/**", "anon");
 		filterChainDefinitionMap.put("/error/**", "anon");
+		filterChainDefinitionMap.put("/api/**", "anon");//系统开放数据访问接口
+		filterChainDefinitionMap.put("/webSocketServer/**", "anon");
 		filterChainDefinitionMap.put("/static/**", "anon");// 配置不会被拦截的链接 顺序判断
 //		filterChainDefinitionMap.put("/logout", "logout");//配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "ShiroLogoutFilter");

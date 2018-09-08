@@ -25,14 +25,14 @@ public class LoginController {
 	
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	
-	@GetMapping("")
+	@GetMapping
     public String loginGet(HttpServletRequest request, Map<String, Object> map) {
 		logger.debug("跳转系统登录页面!");
 		map.put("msg", "-用户登录");
 		return "login";
     }
 	/**当用户已经登录时,再次发送登录请求,shiro不在做处理,需要该类去正确响应**/
-	@PostMapping("")
+	@PostMapping
     public ResponseEntity<JsonResult> loginPost(HttpServletRequest request) {
 		System.err.println(request.getParameter("a"));
 		logger.debug("用户在线中,重复发送了登录请求!");

@@ -43,17 +43,20 @@ button.submit{width: 100%;}
     position: relative;
 }
 .pull-right:{float: right;}
+[v-cloak] {
+		display: none;
+}
 </style>
 </head>
 <body>
-<div id="app">
+<div id="app" v-cloak>
 <div class="divide-wrap">
 <div class="colorbar-before"></div>
 <div class="colorbar-after"></div>
 <div class="colorbar"></div>
 </div>
 <el-row type="flex" class="row-bg" justify="center">
-  <el-col :xs="24" :sm="20" :md="12" :lg="8" :xl="5">
+  <el-col :xs="24" :sm="20" :md="12" :lg="6" :xl="5">
    <el-card shadow="always" class="logincontainer">
     <div slot="header" class="clearfix">
      <span>管理系统</span><span th:text="${msg}"></span>

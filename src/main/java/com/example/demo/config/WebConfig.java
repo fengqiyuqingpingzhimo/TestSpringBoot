@@ -50,20 +50,16 @@ public class WebConfig {
 	    return new ServletRegistrationBean(new TestServlet(),"/testServlet");
 	}
 	/**
-	* @Description:  添加到过滤器链中，此方式适用于使用第三方的过滤器
+	* @Description:  添加到过滤器链中，此方式适用于使用第三方/自定义的过滤器
 	* @author wdm  
 	* @date 2018年3月19日  上午9:10:45
 	 */
 	@Bean
-	public FilterRegistrationBean timeFilter() {
+	public FilterRegistrationBean textFilter() {
 	    FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-	    
-	    TextFilter timeFilter = new TextFilter();
-	    registrationBean.setFilter(timeFilter);
-	    
-	    List<String> urls = new ArrayList<>();
-	    urls.add("/*");
-	    registrationBean.setUrlPatterns(urls);
+	    registrationBean.setFilter(new TextFilter());
+	    registrationBean.addUrlPatterns("/*");
+	    registrationBean.addInitParameter(TextFilter.PARAM_NAME_EXCLUSIONS, "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/plugins/*");
 	    return registrationBean;
 	}
 	/**
@@ -95,7 +91,6 @@ public class WebConfig {
 	 */
 	@Bean
     public PageHelper pageHelper(){
-        //分页插件
         PageHelper pageHelper = new PageHelper();
         Properties properties = new Properties();
         properties.setProperty("reasonable", "true");
