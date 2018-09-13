@@ -5,11 +5,16 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.example.demo.mapper.SelectBuilderTest;
 import com.example.demo.model.Unit;
+import com.example.demo.model.Unit1;
 
 /**  
 * @Title: UnitMapper.java  
@@ -19,6 +24,7 @@ import com.example.demo.model.Unit;
 * @date 2018年6月23日  上午9:52:43
 * @version V1.0  
 */
+@CacheConfig(cacheNames="Cache")
 public interface UnitMapper {
 	
 	 List<Map<String, Object>> select();
@@ -41,6 +47,7 @@ public interface UnitMapper {
 	 List<Map<String, Object>> selectWhrDynCho(@Param("p1")String dwmc,@Param("p2")String dwbh);//动态sql
 	 
 	 @Select("SELECT A.*,B.DWMC,B.DWBH FROM SYS_USER A LEFT JOIN SYS_UNIT B ON A.SSDW=B.GUID")
+	 @Cacheable(key ="'allunit'")
 	 List<Map<String, Object>> annselect();
 	 
 	 //----------------------------------------------------------------------------->
@@ -51,6 +58,12 @@ public interface UnitMapper {
 	 //----------------------------------------------------------------------------->
 	 @SelectProvider(type = SelectBuilderTest.class, method = "SelectBuilder")
 	 List<Map<String, Object>> SelectBuilderTest(String name);
+	 
+	@Select("SELECT * FROM SYS_UNIT ORDER BY DWBH")
+	@Results({ @Result(property = "dw_gid", column = "guid"),
+			   @Result(property = "dw_mc", column = "dwmc"),
+			   @Result(property = "dw_bh", column = "dwbh")})
+	List<Unit1> getAllUnit1();
 	 
 	 
 

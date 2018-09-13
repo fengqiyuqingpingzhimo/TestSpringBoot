@@ -19,10 +19,9 @@ import com.example.demo.model.User;
 * @Description: TODO
 * @author wdm  
 * @date 2018年6月25日  上午10:22:26
-* @version V1.0
 * 关于spring配置缓存相关问题   resources/static/option/Cache注解详解
  */
-@CacheConfig(cacheNames = "users")//配置了该数据访问对象中返回的内容将存储于名为users的缓存对象中
+@CacheConfig(cacheNames = "Cache")//配置了该数据访问对象中返回的内容将存储于名为Cache的缓存对象中
 public interface UserMapper {
     int deleteByPrimaryKey(String id);
 
@@ -65,7 +64,8 @@ public interface UserMapper {
     
     @Select("SELECT * FROM SYS_USER WHERE ID=#{id}")
     @Cacheable(key ="#p0")//将查询结果缓存到redis中,（key="#p0"）指定传入的第一个参数作为redis的key。
-    User annSelectByPrimaryKey(@Param("id") String id);
+//    @Cacheable(value="getWorkDetailPhotos",key="'getWorkDetailPhotos'.concat(#root.args[0])")
+    public User annSelectByPrimaryKey(@Param("id") String id);
     //注意，使用#符号和$符号的不同：
    // This example creates a prepared statement, something like select * from teacher where name = ?;
    //@Select("Select * from teacher where name = #{name}")
