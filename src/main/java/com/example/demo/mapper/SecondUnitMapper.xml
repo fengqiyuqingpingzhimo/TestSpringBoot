@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.seconddao.SecondUnitMapper">
+ <!-- SELECT -->
+  <select id="select" resultType="java.util.Map">
+   SELECT B.* FROM SYS_UNIT B  WHERE B.DWBH='0001'
+  </select>
+  <select id="selectWhr" resultType="java.util.Map">
+<!--      SELECT A.* FROM SYS_UNIT A WHERE DWMC LIKE '%'||#{0}||'%' OR DWBH=#{1} -->
+SELECT A.* FROM SYS_UNIT A WHERE DWMC LIKE '%'||#{p1}||'%' OR DWBH=#{p2}
+<!-- SELECT A.* FROM SYS_UNIT A WHERE DWMC LIKE #{p1} OR DWBH=#{p2} -->
+  </select>
+  <select id="selectWhrMap" resultType="java.util.Map" parameterType="java.util.Map">
+     SELECT A.* FROM SYS_UNIT A WHERE DWMC LIKE '%'||#{dwmc}||'%' OR DWBH=#{dwbh}
+  </select>
+  <select id="selectWhrList" resultType="java.util.Map">
+     SELECT A.* FROM SYS_UNIT A WHERE DWBH IN
+     <foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+	　　　　#{item}  
+	　</foreach> 
+  </select>
+  <select id="selectWhrMapList" resultType="java.util.Map">
+     SELECT A.* FROM SYS_UNIT A WHERE DWBH=#{dwbh} OR DWBH IN
+     <foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+	　　　　#{item}  
+	　</foreach> 
+  </select>
+  <select id="selectWhrDyn" resultType="java.util.Map" parameterType="com.example.demo.model.Unit">
+     SELECT A.* FROM SYS_UNIT A 
+     <where>
+     <if test="guid != null"> GUID LIKE '%'||#{guid}||'%'</if>
+     <if test="dwmc != null"> AND DWMC LIKE '%'||#{dwmc}||'%'</if>
+     <if test="dwbh != null"> AND DWBH LIKE '%'||#{dwbh}||'%'</if>
+     </where> 
+  </select>
+  <select id="selectWhrDynTrim" resultType="java.util.Map" parameterType="com.example.demo.model.Unit">
+     SELECT A.* FROM SYS_UNIT A 
+<!--      删除前缀 prefixOverrides/删除后缀suffixOverrides,拼接前缀prefix -->
+     <trim prefix="WHERE" prefixOverrides="AND |OR ">
+     <if test="guid != null"> AND GUID LIKE '%'||#{guid}||'%'</if>
+     <if test="dwmc != null"> AND DWMC LIKE '%'||#{dwmc}||'%'</if>
+     <if test="dwbh != null"> AND DWBH LIKE '%'||#{dwbh}||'%'</if>
+     </trim>
+  </select>
+  <select id="selectWhrDynCho" resultType="java.util.Map">
+     SELECT * FROM SYS_UNIT WHERE 1=1 
+     <choose>
+        <when test="p1 !=null">AND DWMC LIKE '%'||#{p1}||'%'</when>
+        <when test="p2 !=null">AND DWBH LIKE '%'||#{p2}||'%'</when>
+        <otherwise>AND DWBH='0001'</otherwise>
+     </choose>
+  </select>
+  <select id="selectWhrBind" resultType="java.util.Map">
+	  <bind name="pattern" value="'%' + _parameter.getDwmc() + '%'" />
+	  SELECT * FROM SYS_UNIT WHERE DWMC LIKE #{pattern}
+  </select>
+  <!-- INSERT -->
+  <insert id="addUnit" parameterType="com.example.demo.model.Unit">
+    <selectKey order="BEFORE" keyProperty="guid" resultType="String">SELECT SYS_GUID() A FROM DUAL</selectKey>
+    INSERT INTO SYS_UNIT(GUID,DWMC,DWBH) VALUES (#{guid},#{dwmc},#{dwbh})
+  </insert>
+  
+  
+  
+</mapper>

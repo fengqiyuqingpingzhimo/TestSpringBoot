@@ -1,9 +1,10 @@
 package com.example.demo.config;
 
-import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
@@ -22,7 +23,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 * @Description: redis配置相关
 * @author wdm  
 * @date 2018年6月22日  下午3:30:49
-* @version V1.0  
 */
 @Configuration
 @EnableCaching

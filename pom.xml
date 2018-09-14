@@ -45,6 +45,17 @@
 			  <artifactId>ojdbc6</artifactId>
 			  <version>11.2.0.1.0</version>
 		</dependency>
+		<!-- mysql -->
+		<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- 邮件服务 -->
+	    <dependency> 
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-mail</artifactId>
+	    </dependency> 
 		<!-- 分页插件  2018-4-14 09:01:37 wdm -->
 		<dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -151,11 +162,6 @@
         <dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-websocket</artifactId>
-		</dependency>
-	    <!-- JavaMail  -->
-	    <dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 	    <dependency>
 	    	<groupId>org.springframework.boot</groupId>

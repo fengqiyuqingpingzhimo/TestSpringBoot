@@ -5,13 +5,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
 
     private String loginname;
 
-//    private transient String password;//transient 序列化时不会被保存
+//    private transient String password;//transient 序列化时不会被保�?
     private String password;
     private Date createtime;
 

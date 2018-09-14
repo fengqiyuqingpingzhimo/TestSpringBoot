@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.mapper.dao.UserMapper;
@@ -21,8 +22,7 @@ import com.example.demo.model.User;
 @Service
 public class UserService {
 	
-	@Autowired
-	private UserMapper userMapper;
+	@Lazy @Autowired private UserMapper userMapper;
 
 	public User selectByPrimaryKey(String id) {
 		return userMapper.selectByPrimaryKey(id);

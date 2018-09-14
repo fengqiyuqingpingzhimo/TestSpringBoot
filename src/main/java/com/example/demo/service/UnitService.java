@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -8,8 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.mapper.dao.UnitMapper;
 import com.example.demo.mapper.dao.UserMapper;
+import com.example.demo.mapper.seconddao.SecondUnitMapper;
 import com.example.demo.model.Unit;
+import com.example.demo.model.Unit1;
 import com.example.demo.util.AppUtil;
+import com.google.gson.Gson;
 
 /**  
 * @Title: UnitService.java  
@@ -24,6 +30,7 @@ public class UnitService {
 	
 	@Autowired private UnitMapper unit;
 	@Autowired private UserMapper user;
+	@Autowired private SecondUnitMapper units;
 	
 	/**
 	 * spring +mybatis 事务处理
@@ -73,6 +80,26 @@ public class UnitService {
 	
 	public int addUnit(Unit unit) {
 		return this.unit.addUnit(unit);
+	}
+	
+	public List<Map<String, Object>> annselect(){
+		return this.unit.annselect();
+	}
+	
+	public List<Unit1> getAllUnit1(){
+		return this.unit.getAllUnit1();
+	}
+	
+	public List<Unit1> getAllUnits1(){
+		System.err.println(new Gson().toJson(this.units.select()));
+		return this.units.getAllUnit1();
+	}
+	@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
+	public void doTest() {
+		//测试两个不同类型的数据库一起执行的事务
+		int o=this.unit.annAddUnit(new Unit(AppUtil.createGuid(), "ORECLE", "9999"));
+		int m=this.units.annAddUnit(new Unit(AppUtil.createGuid(32), "MYSQL", "9999"));//主键长度超出 保存失败
+		System.err.println("o:="+o+"   m:="+m);
 	}
 	
 
