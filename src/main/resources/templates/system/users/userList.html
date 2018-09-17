@@ -15,10 +15,14 @@ IMG{max-width: 50px;}
              <dd th:text="${#dates.format(bean.time, 'yyyy-MM-dd')}">默认时间</dd>
         </dl>
    <hr/>
+   <div>
+     <span th:if="${data.endRow eq 0}">暂无记录!</span>
+     <span th:if="${data.endRow ne 0}" th:text="|显示${data.startRow+1}到${data.endRow+1},共${data.size}条数据!|"></span>
+   </div>
    <table>
     <thead><tr><th>序号</th><th>编号</th><th>名称</th><th>密码</th><th>创建时间</th><th>编号排序</th><th>人员类型</th><th>操作相关</th></tr></thead>
     <tbody th:remove="all-but-first">
-    <tr th:each="list,listStat1:${data}"> 
+    <tr th:each="list,listStat1:${data.list}"> 
 	    <td th:text="${listStat1.count}">1</td>
 	    <td th:text="${list.id}"></td>
 	    <td th:text="${list.loginname}"></td>
@@ -46,11 +50,12 @@ IMG{max-width: 50px;}
     </tr>
     </tbody>
    </table>
+   <div></div>
    <a th:href="@{/logout}">系统退出</a>
    <div th:include="test_thymeleaf/footer :: footer" class="footerContainer"></div>
    <div th:replace="test_thymeleaf/footer :: footer" class="footerContainer"></div>
 <script th:inline="javascript">
-        var size= [[${data.size()}]];
+        var size= [[${data.list.size()}]];
         console.info(size);
         //尺寸等于3时打印日志..
         /*[# th:if="${data.size() eq 3}"]*/
