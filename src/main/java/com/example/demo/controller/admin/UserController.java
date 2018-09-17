@@ -34,7 +34,6 @@ public class UserController {
 	/**
 	 * 根据ID查询用户
 	 * @param id
-	 * @return
 	 */
 	@RequestMapping(value = "user/{id}", method = RequestMethod.GET)
 	public ResponseEntity<JsonResult> getUserById (@PathVariable(value = "id") String id){
