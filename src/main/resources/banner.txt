@@ -1,6 +1,6 @@
 ${AnsiColor.BRIGHT_YELLOW}
                                       __            __          
                                     (_  _ . _  _   |__) _  _ |_            
-                                    __)|_)|| )(_)  |__)(_)(_)|_)   @Wangdm
+                                    __)|_)|| )(_)  |__)(_)(_)|_)   @守得莲开结伴游
                                        |      _/     
 Project version:${application.formatted-version}   Spring boot version: ${spring-boot.formatted-version}                                            
