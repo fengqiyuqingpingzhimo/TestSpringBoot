@@ -19,8 +19,8 @@ import com.alibaba.druid.pool.DruidDataSource;
 * @author wdm  
 * @date 2018年9月13日  上午11:16:14
 */
-@Configuration
-@MapperScan(basePackages = "com.example.demo.mapper.seconddao", sqlSessionTemplateRef = "secondSqlSessionTemplate")
+//@Configuration
+//@MapperScan(basePackages = "com.example.demo.mapper.seconddao", sqlSessionTemplateRef = "secondSqlSessionTemplate")
 public class SecondDataSourceConfig {
 	
 	@ConfigurationProperties(prefix = "mds.second.datasource")

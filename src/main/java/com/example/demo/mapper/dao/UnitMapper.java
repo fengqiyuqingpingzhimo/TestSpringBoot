@@ -64,7 +64,9 @@ public interface UnitMapper {
 			   @Result(property = "dw_mc", column = "dwmc"),
 			   @Result(property = "dw_bh", column = "dwbh")})
 	List<Unit1> getAllUnit1();
-	 
+	
+	@Select("SELECT * FROM SYS_UNIT WHERE 1=1 ORDER BY DWBH")
+	List<Unit> getUnitList();
 	 
 
 }

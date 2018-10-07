@@ -16,8 +16,8 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 * @author wdm  
 * @date 2018年9月13日  上午11:05:54
 */
-@Configuration
-@MapperScan(basePackages = "com.example.demo.mapper.dao", sqlSessionTemplateRef = "baseSqlSessionTemplate")
+//@Configuration
+//@MapperScan(basePackages = "com.example.demo.mapper.dao", sqlSessionTemplateRef = "baseSqlSessionTemplate")
 public class FirstDataSourceConfig {
 	
 //	@Bean(name = "baseTransactionManager")

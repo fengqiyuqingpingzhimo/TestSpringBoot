@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.mapper.dao.UserMapper;
 import com.example.demo.model.User;
+import com.example.demo.util.AppUtil;
+import com.example.demo.util.JsonResult;
 
 /**  
 * @Title: UserService.java  
@@ -36,8 +38,24 @@ public class UserService {
 	public int insert(User record) {
 		return userMapper.insert(record);
 	}
-	public int insertSelective(User record) {
-		return userMapper.insertSelective(record);
+	public JsonResult insertSelective(User record) {
+		JsonResult r = new JsonResult();
+		record.setId(AppUtil.createGuid());
+		try {
+			int orderId = userMapper.insertSelective(record);
+			if (orderId < 0) {
+				r.setResult(orderId);
+				r.setStatus("fail");
+			} else {
+				r.setResult(orderId);
+				r.setStatus("ok");
+			}
+		} catch (Exception e) {
+			r.setResult(e.getClass().getName() + ":" + e.getMessage());
+			r.setStatus("error");
+			e.printStackTrace();
+		}
+		return r;
 	}
 	public List<User> getUserList() {
 		return userMapper.getUserList();

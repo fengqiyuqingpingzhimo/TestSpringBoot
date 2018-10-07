@@ -102,5 +102,9 @@ public class UnitService {
 		System.err.println("o:="+o+"   m:="+m);
 	}
 	
+	public List<Unit> getUnitList(){
+		return this.unit.getUnitList();
+	}
+	
 
 }

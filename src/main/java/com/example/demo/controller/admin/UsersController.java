@@ -3,6 +3,8 @@ package com.example.demo.controller.admin;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.component.AppProperties;
 import com.example.demo.model.User;
+import com.example.demo.service.UnitService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JsonResult;
 import com.github.pagehelper.PageHelper;
@@ -29,11 +32,13 @@ import com.google.gson.Gson;
 public class UsersController {
 	@Autowired private AppProperties pro;
 	@Autowired private UserService service;
+	@Autowired private UnitService unitService;
 	
 	@RequestMapping
     public String goList(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Map<String,Object> map) {
 		PageHelper.startPage(pageNum,5);
-		PageInfo<User> pageInfo = new PageInfo<User>(service.getUserList());
+		List<User> users = service.getUserList();
+		PageInfo<User> pageInfo = new PageInfo<User>(users);
 		System.err.println(new Gson().toJson(pageInfo));
         map.put("msg", "Hello Thymeleaf");
         map.put("author", pro.getAuthor());
@@ -42,6 +47,22 @@ public class UsersController {
         map.put("html", "<div>This is an <em>HTML</em> text. <b>Enjoy yourself!</b></div>");
         return "system/users/userList";
     }
+	/**跳转edit页面**/
+	@RequestMapping("goEdit")
+    public String goEdit(Map<String,Object> map) {
+        map.put("unitList", this.unitService.getUnitList());
+        return "system/users/userEdit";
+    }
+	/**信息保存**/
+	@RequestMapping("doEdit")
+	public String doEdit (HttpServletRequest request,User user){
+		JsonResult jr=service.insertSelective(user);
+		if("ok".equals(jr.getStatus())) {
+			return "redirect:/users";
+		}
+		request.setAttribute("userBack", jr);
+		return "system/users/userEdit";
+	}
 	
 //	/**
 //	 * 根据ID查询用户
@@ -147,25 +168,6 @@ public class UsersController {
 //	 * @param user
 //	 * @return
 //	 */
-//	@RequestMapping(value = "user", method = RequestMethod.GET)
-//	public ResponseEntity<JsonResult> add (User user){
-//		JsonResult r = new JsonResult();
-//		try {
-//			int orderId = userService.insertSelective(user);
-//			if (orderId < 0) {
-//				r.setResult(orderId);
-//				r.setStatus("fail");
-//			} else {
-//				r.setResult(orderId);
-//				r.setStatus("ok");
-//			}
-//		} catch (Exception e) {
-//			r.setResult(e.getClass().getName() + ":" + e.getMessage());
-//			r.setStatus("error");
-//			e.printStackTrace();
-//		}
-//		return ResponseEntity.ok(r);
-//	}
 //	/**
 //	* @Description: 删除用户
 //	* @author wdm  

@@ -26,12 +26,11 @@ public class JmsTest {
 	@Autowired private JmsMessagingTemplate jmsMessagingTemplate;
 	@Autowired private Queue queue;
 	
-	@Scheduled(cron="*/10 * * * * ?")
-    private void send(){
-		String data=new SimpleDateFormat("HH:mm:ss").format(new Date());
-    	logger.debug("现在时间:{}",data);
-    	 this.jmsMessagingTemplate.convertAndSend(this.queue, data);
-//    	logger.debug("this is scheduler task runing {} ",(count++));
-    }
+//	@Scheduled(cron="*/10 * * * * ?")
+//    private void send(){
+//		String data=new SimpleDateFormat("HH:mm:ss").format(new Date());
+//    	logger.debug("现在时间:{}",data);
+//    	this.jmsMessagingTemplate.convertAndSend(this.queue, data);
+//    }
 
 }

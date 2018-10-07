@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.mybatis.spring.annotation.MapperScan;
 //import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableCaching   //开启缓存
 @EnableJms  //开启 jms能力 消息队列
 @EnableTransactionManagement //如果mybatis中service实现类中加入事务注解，需要此处添加该注解
-//@MapperScan("com.example.demo.mapper.dao") //扫描mybatis mapper 当配置多数据源时,因为会在config中扫描相关mapper 该出注解应该删除
+@MapperScan("com.example.demo.mapper") //扫描mybatis mapper 当配置多数据源时,因为会在config中扫描相关mapper 该出注解应该删除
 public class Application extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) {

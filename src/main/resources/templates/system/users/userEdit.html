@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Xy</title>
+<style type="text/css">
+IMG{max-width: 50px;}
+</style>
+</head>
+<body>
+<form th:action="@{/users/doEdit}">
+  <input type="hidden" name="id" th:value="${userBack?.status}">
+  <p> 登录名:<input type="text" name="loginname"/></p>
+  <p> 密码:<input type="password" name="password"/></p>
+  <p> 类型:<select name="flag">
+		    <option value="ONE">第一组</option>
+		    <option value="TWO">第二组</option>
+		  </select>
+  </p>
+  <p> 所属单位:<select name="ssdw" th:remove="${#lists.isEmpty(unitList)}?none:all-but-first">
+                <option th:each="list:${unitList}" th:value="${list.guid}" th:text="${'['+list.dwbh+']'+list.dwmc}"></option>
+                <option value="">暂无单位</option>
+		    </select>
+  </p>
+  <button type="submit">表单提交</button>
+</form>
+   <hr/>
+   <div></div>
+   <a th:href="@{/logout}">系统退出</a>
+   <div th:include="test_thymeleaf/footer :: footer" class="footerContainer"></div>
+   <div th:replace="test_thymeleaf/footer :: footer" class="footerContainer"></div>
+<script th:inline="javascript">
+        //尺寸等于3时打印日志..
+        /*[# th:if="${data.size() eq 3}"]*/
+        console.info('Welcome admin');
+        /*[/]*/
+</script>
+</body>
+</html>
